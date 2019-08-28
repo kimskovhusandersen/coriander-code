@@ -1,5 +1,4 @@
-<script>
-console.log("Exercise 1 - logType:")
+console.log("Exercise 1 - logType:");
 // https://spiced.space/coriander/control_flow/
 
 // undefined, null, boolean, number, NaN, string, symbol, object
@@ -18,15 +17,14 @@ function logType(arg) {
         console.log("String!");
     } else if (Array.isArray(arg)) {
         console.log("Array!");
-    } else if (typeof arg == 'function') {
+    } else if (typeof arg == "function") {
         console.log("Function!");
-    } else if (typeof arg == 'object') {
+    } else if (typeof arg == "object") {
         console.log("Object!");
     } else {
-        console.log("I have no idea!")
+        console.log("I have no idea!");
     }
 }
-
 
 logType(undefined);
 logType(null);
@@ -35,11 +33,11 @@ logType(1);
 logType(NaN);
 logType("Hi");
 logType([]);
-logType(function(){})
+logType(function() {});
 logType({});
 
-console.log('---------------------')
-console.log("Exercise 2 - Object:")
+console.log("---------------------");
+console.log("Exercise 2 - Object:");
 
 var a = {
     Berlin: "Germany",
@@ -51,16 +49,13 @@ var b = {};
 for (var prop in a) {
     b[a[prop]] = prop;
 }
-console.log(b)
+console.log(b);
 
-console.log('---------------------')
-console.log("Exercise 3 - While loop:")
+console.log("---------------------");
+console.log("Exercise 3 - While loop:");
 
-x = 10;
+var x = 10;
 while (x > 0) {
     console.log(x);
     x--;
 }
-
-
-</script>
