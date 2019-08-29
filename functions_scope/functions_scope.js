@@ -3,17 +3,12 @@ console.log("Exercise 1 - Sum");
 function sum() {
     var sum = 0;
     for (var i = 0; i < arguments.length; i++) {
-        if (
-            Number.isNaN(arguments[i]) != true &&
-            typeof arguments[i] == "number"
-        ) {
-            sum += arguments[i];
-        }
+        sum += arguments[i];
     }
-    return sum;
+    return Number.isNaN(sum) != true && typeof sum == "number" ? sum : NaN;
 }
 console.log(sum(1, 5, 2, 8434.343));
-console.log(sum(1, 5, 2, "hihi"));
+console.log(sum("hihi"));
 
 console.log("-------------------------------");
 console.log("Exercise 2 - waitThenRun");
@@ -34,7 +29,10 @@ console.log("-------------------------------");
 console.log("Exercise 3 - theMillionNumberFunction");
 
 function theMillionNumberFunction(number) {
-    if (number <= 0) {
+    if (
+        number <= 0 ||
+        (Number.isNaN(number) == false && typeof number != "number")
+    ) {
         return "ERROR";
     } else if (number < 1000000) {
         return keepMultiplying(number);
@@ -51,6 +49,8 @@ function theMillionNumberFunction(number) {
     }
 }
 
+console.log(theMillionNumberFunction("Gotcha!"));
+console.log(theMillionNumberFunction(null));
 console.log(theMillionNumberFunction(NaN));
 console.log(theMillionNumberFunction(-1));
 console.log(theMillionNumberFunction(0));
@@ -61,7 +61,7 @@ console.log(theMillionNumberFunction(1000000));
 console.log("-------------------------------");
 console.log("Exercise 4 - Bonus Exercise");
 
-function getTotaler(num) {
+function getTotaler() {
     var sum = 0;
     return function fn2(num) {
         sum += num;
