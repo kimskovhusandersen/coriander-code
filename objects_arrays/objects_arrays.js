@@ -1,12 +1,12 @@
 // Exercise 1
-function each(obj_or_arr, callback) {
-    if (Array.isArray(obj_or_arr)) {
-        for (var i = 0; i < obj_or_arr.length; i++) {
-            callback(obj_or_arr[i], i);
+function each(objOrArr, callback) {
+    if (Array.isArray(objOrArr)) {
+        for (var i = 0; i < objOrArr.length; i++) {
+            callback(objOrArr[i], i);
         }
-    } else if (typeof obj_or_arr == "object") {
-        for (i in obj_or_arr) {
-            callback(obj_or_arr[i], i);
+    } else if (typeof objOrArr == "object") {
+        for (i in objOrArr) {
+            callback(objOrArr[i], i);
         }
     }
 }
@@ -42,7 +42,11 @@ reverseArray([1, 2, -1, -90, 10]); // returns [10, -90, -1, 2, 1]
 
 // Exercise 3
 function getLessThanZero(arr) {
-    return Array.isArray(arr) ? arr.filter(i => i < 0) : false;
+    if (Array.isArray(arr)) {
+        return arr.filter(function(i) {
+            return i < 0;
+        });
+    }
 }
 
 // Test
