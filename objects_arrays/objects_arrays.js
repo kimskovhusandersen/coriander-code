@@ -1,6 +1,6 @@
 // Exercise 1
 function each(obj_or_arr, callback) {
-    if (Array.isArray(obj_or_arr) == true) {
+    if (Array.isArray(obj_or_arr)) {
         for (var i = 0; i < obj_or_arr.length; i++) {
             callback(obj_or_arr[i], i);
         }
@@ -28,21 +28,23 @@ each(["a", "b"], function(val, idx) {
 
 // Exercise 2
 function reverseArray(arr) {
-    if (Array.isArray(arr) == true) {
+    if (Array.isArray(arr)) {
         var newArr = [];
-        for (let i = arr.length - 1; i > 0; i--) {
+        for (var i = arr.length - 1; i >= 0; i--) {
             newArr.push(arr[i]);
         }
         return newArr;
     }
-} // don't use reverse or slice
-
-// Test
-reverseArray([1, 2, -1, -90, 10]);
-
-function getLessThanZero(arr) {
-    return Array.isArray(arr) == true ? arr.filter(i => i < 0) : false;
 }
+
 // Test
-getLessThanZero([1, 2, -1, -90, 10]); //[-1, -90]
-getLessThanZero([1, 2]); //[]
+reverseArray([1, 2, -1, -90, 10]); // returns [10, -90, -1, 2, 1]
+
+// Exercise 3
+function getLessThanZero(arr) {
+    return Array.isArray(arr) ? arr.filter(i => i < 0) : false;
+}
+
+// Test
+getLessThanZero([1, 2, -1, -90, 10]); // returns [-1, -90]
+getLessThanZero([1, 2]); // returns []
