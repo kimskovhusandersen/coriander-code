@@ -57,7 +57,6 @@
         right--;
         headlines.style.right = right + "px";
         var lastLink = links[links.length - 1];
-        console.log(right, -lastLink.offsetWidth);
         if (right < -lastLink.offsetWidth - getMarginLeft(lastLink)) {
             headlines.style.right =
                 right + lastLink.offsetWidth + getMarginLeft(lastLink) + "px";
