@@ -1,0 +1,29 @@
+body {
+    background-color: #eee;
+    overflow: hidden;
+}
+
+div.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+canvas#outerCanvas {
+    border: 1px solid #ccc;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+canvas#innerCanvas {
+    /* border: 1px solid black; */
+    /* background-color: LimeGreen; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
