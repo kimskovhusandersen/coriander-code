@@ -57,12 +57,11 @@
         right--;
         headlines.style.right = right + "px";
         var lastLink = links[links.length - 1];
-        if (right < -lastLink.offsetWidth - getMarginLeft(lastLink)) {
+        if (right < -lastLink.offsetWidth) {
             headlines.style.right =
                 right + lastLink.offsetWidth + getMarginLeft(lastLink) + "px";
             lastLink.parentElement.insertBefore(lastLink, links[0]);
         }
-
         animId = requestAnimationFrame(moveHeadline);
     }
 })();

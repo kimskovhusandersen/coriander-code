@@ -12,7 +12,10 @@ function changeStyles(selector) {
 // Exercise 2:
 
 function classesAsArray(className) {
-    return Array.from(document.getElementsByClassName(className));
+    // return Array.from(document.getElementsByClassName(className)); // only workds in newer browsers
+    return Array.prototype.slice.call(
+        document.getElementsByClassName(className)
+    );
 }
 
 // Exercise 3:
@@ -33,17 +36,15 @@ function classesAsArray2(className) {
     var classesArray = [];
     keepSearching(root);
     function keepSearching(root) {
-        if (Object.keys(root.children).length > 0) {
-            for (var i = 0; i < root.children.length; i++) {
-                if (
-                    (" " + root.children[i].className + " ").indexOf(
-                        " " + className + " "
-                    ) > -1
-                ) {
-                    classesArray.push(root.children[i]);
-                }
-                keepSearching(root.children[i]);
+        for (var i = 0; i < root.children.length; i++) {
+            if (
+                (" " + root.children[i].className + " ").indexOf(
+                    " " + className + " "
+                ) > -1
+            ) {
+                classesArray.push(root.children[i]);
             }
+            keepSearching(root.children[i]);
         }
     }
     return classesArray;
