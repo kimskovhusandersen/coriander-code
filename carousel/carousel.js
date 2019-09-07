@@ -27,7 +27,7 @@
     });
 
     function moveKitties() {
-        console.log("current is " + current);
+        // console.log("current is " + current);
         k[current].classList.remove("onscreen");
         k[current].classList.add("exit");
         current++;
