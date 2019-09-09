@@ -6,6 +6,11 @@
     var dialogOverlay = $("#dialog-overlay");
     var dialog = $("#dialog");
 
+    setTimeout(function() {
+        dialogOverlay.css({ visibility: "visible" });
+        dialog.css({ visibility: "visible" });
+    }, 1000);
+
     hamburger.click(function() {
         sideNav.addClass("on");
         sideNav.css({ visibility: "visible" });

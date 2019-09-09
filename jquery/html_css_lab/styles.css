@@ -28,7 +28,7 @@ p {
 }
 
 #dialog {
-    visibility: visible;
+    visibility: hidden;
     position: absolute;
     top: 50vh;
     left: 50vw;
@@ -83,30 +83,20 @@ header {
     cursor: pointer;
 }
 
-#dialog-overlay {
+.overlay {
     position: absolute;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.8);
-    visibility: visible;
     z-index: 2;
     cursor: pointer;
+    visibility: hidden;
 }
 
 #overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    visibility: hidden;
-    /* transition solution */
     transition: 2s;
-    z-index: 2;
-    cursor: pointer;
 }
 
 #side-nav {

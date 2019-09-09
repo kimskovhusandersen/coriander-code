@@ -21,7 +21,6 @@
             topImg.animate({ width: 0 + "px" }, 500);
             slider.animate({ left: 0 + "px" }, 500);
         }
-        console.log(slider.position().left);
         if (slider.position().left > 575 - sliderWidth) {
             topImg.animate({ width: containerWidth - sliderWidth + "px" }, 500);
             slider.animate({ left: containerWidth - sliderWidth + "px" }, 500);
