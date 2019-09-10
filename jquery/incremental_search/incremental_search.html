@@ -1,0 +1,42 @@
+<!--
+input event:
+- get list of countries that match the input we got from the user.
+If the user types in gibberish we should render "no results" message.
+
+mouseover (hover) elements:
+- highlight country the user is currently hovering over.
+
+mousedown:
+- put the value that the user clicks in the input field to the text conained by the event target.
+
+keydown (arrow up and down):
+- allows the user to scroll up and down using the up arrow (38) and down arrow (40)
+ And, if the user presses "enter" (13) while a country is highlighted, that value should appear in the input field.
+
+blur event (happens when clicking outside of the input field):
+- hide the search result
+
+focus event when clicking in the input field again.
+- show the results for the input currently in the input field
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="incremental_search.css">
+    <title></title>
+</head>
+
+<body>
+    <main>
+        <input id="search" type="text" placeholder="enter some letters.." name="search" value="">
+        <div id="result"></div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="incremental_search.js" charset="utf-8"></script>
+</body>
+
+</html>
