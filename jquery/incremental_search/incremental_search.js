@@ -33,16 +33,15 @@
     search.on({
         input: updateResult,
         paste: updateResult,
-        keydown: function(e) {
+        keyup: function(e) {
             var children = $(result.get(0).children);
             var hasHighlight = result.find("p.highlight").index();
-
             //  down
             if (e.keyCode == 40) {
                 if (hasHighlight == -1) {
                     children.eq(0).addClass("highlight");
                 }
-                if (hasHighlight > -1 && hasHighlight < 3) {
+                if (hasHighlight > -1 && hasHighlight < children.length - 1) {
                     children.eq(hasHighlight).removeClass("highlight");
                     children
                         .eq(hasHighlight)
@@ -53,9 +52,9 @@
             // up
             if (e.keyCode == 38) {
                 if (hasHighlight == -1) {
-                    children.eq(3).addClass("highlight");
+                    children.eq(children.length - 1).addClass("highlight");
                 }
-                if (hasHighlight < 4 && hasHighlight > 0) {
+                if (hasHighlight < children.length && hasHighlight > 0) {
                     children.eq(hasHighlight).removeClass("highlight");
                     children
                         .eq(hasHighlight)
