@@ -1,5 +1,5 @@
 (function() {
-    var result = document.getElementById("result");
+    // var result = document.getElementById("result");
     translateNumberToGerman();
 
     function askForNumber() {
@@ -26,10 +26,10 @@
         ];
         try {
             var num = askForNumber();
-            result.innerHTML = translation[num];
+            return translation[num];
         } catch (e) {
             console.log(`You should enter a number between 1-10. ${e}`);
-            translateNumberToGerman();
+            return translateNumberToGerman();
         }
     }
 })();
