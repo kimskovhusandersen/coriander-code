@@ -1,39 +1,18 @@
 (function() {
     // Define board and context
-    function setDimensions() {
-        var margin = 0.02;
-        var width =
-            window.innerWidth > window.innerHeight
-                ? window.innerHeight * (1 - margin)
-                : window.innerWidth * (1 - margin); // board width
-        var height = (width / 7) * 6; // board height
-
-        var w = width / 7; // cell height
-        var h = height / 6; // cell height
-
-        var cw = w * 1.6; // circle width
-        var ch = w * 1.6; // cicle height
-        var cbr = cw / 2; // circle border radius
-        var cb = cw / 12; // cicle border
-
-        (function draw() {
-            slots.css({ width: `${w}px`, height: `${h}px` });
-            circles.css({
-                width: `${cw}px`,
-                height: `${ch}px`,
-                "border-radius": `${cbr}px`,
-                border: `${cb}px solid ${colorBoard}`
-            });
-        })();
-    }
-
-    var grid = [7, 6]; // 7 columns, 6 rows
     var board = $("#board");
     var circles = $(".circle");
     var slots = $(".slot");
     var columns = $(".column");
     var messageBoard = $("#messageBoard");
     var messageInner = $("#message");
+    var grid = [7, 6]; // 7 columns, 6 rows
+    var margin = 0.02;
+    var width =
+        window.innerWidth > window.innerHeight ?
+        window.innerHeight * (1 - margin) :
+        window.innerWidth * (1 - margin); // board width
+    var height = (width / grid[0]) * grid[1]; // board height
 
     // Define colors
     var colorp0 = getRandomColor();
@@ -43,9 +22,23 @@
     var message, gameover, gametie, player;
 
     // Define event listeners
-    messageBoard.on("click", newGame);
-    $(window).on("resize", setDimensions);
+    messageBoard.on("click", resetGame);
 
+    function switchPlayer() {
+        player = player ? 0 : 1;
+        // if (player == 0) {
+        //     columns.on("click", loop);
+        //     columns.on("mouseover", addHighlight);
+        //     columns.on("mouseout", removeHighlight);
+        // } else {
+        //     columns.off("click", loop);
+        //     columns.off("mouseover", addHighlight);
+        //     columns.off("mouseout", removeHighlight);
+        //     loop();
+        // }
+    }
+
+    // This function returns a random color (rgb) as a string
     function getRandomColor() {
         var rand = function() {
             return Math.floor(Math.random() * 256);
@@ -121,7 +114,7 @@
             $.each($(cells), function(j, cell) {
                 if (!$(cell).hasClass("p0") && !$(cell).hasClass("p1")) {
                     legalMoves.push($(cell));
-                    return false; // break out of loop
+                    return false; // break
                 }
             });
         });
@@ -206,63 +199,56 @@
 
         return gametie;
     }
+
     function checkForMessage() {
         if (message.length > 0) {
             var color = player ? colorp0 : colorp1;
             messageInner.html(message.toUpperCase());
-            messageInner.css({ color: color });
-            messageBoard.css({ visibility: "visible" });
+            messageInner.css({
+                color: color
+            });
+            messageBoard.css({
+                visibility: "visible"
+            });
         }
     }
 
-    function switchPlayer() {
-        player = player ? 0 : 1;
-        if (player == 0) {
-            columns.on("click", loop);
-            columns.on("mouseover", addHighlight);
-            columns.on("mouseout", removeHighlight);
-        } else {
-            columns.off("click", loop);
-            columns.off("mouseover", addHighlight);
-            columns.off("mouseout", removeHighlight);
-            loop();
-        }
-    }
 
-    function newGame() {
-        setDimensions();
+
+    function resetGame() {
         $(".p0").removeClass("p0");
         $(".p1").removeClass("p1");
         $(".highlight").removeClass("highlight");
-        messageBoard.css({ visibility: "hidden" });
+        messageBoard.css({
+            visibility: "hidden"
+        });
         message = "";
         gameover = false;
-        // player = Math.floor(Math.random() * 2);
-        player = 1;
-        if (player == 0) {
-            columns.on("click", loop);
-            columns.on("mouseover", addHighlight);
-            columns.on("mouseout", removeHighlight);
-        } else {
-            columns.off("click", loop);
-            columns.off("mouseover", addHighlight);
-            columns.off("mouseout", removeHighlight);
-            loop();
-        }
+        player = Math.floor(Math.random() * 2);
+        // if (player == 0) {
+        columns.on("click", loop);
+        columns.on("mouseover", addHighlight);
+        columns.on("mouseout", removeHighlight);
+        // } else {
+        //     columns.off("click", loop);
+        //     columns.off("mouseover", addHighlight);
+        //     columns.off("mouseout", removeHighlight);
+        //     loop();
+        // }
     }
 
     function loop() {
         var colNum, rowNum;
-        if (player == 0) {
-            colNum = getColNumber($(event.currentTarget));
-            rowNum = getRowNumber(getAvailableCells(colNum));
-            selectCell(colNum);
-            checkForVictory(colNum, rowNum);
-            checkForTie();
-            checkForMessage();
-            switchPlayer();
-        }
+
+        colNum = getColNumber($(event.currentTarget));
+        rowNum = getRowNumber(getAvailableCells(colNum));
+        selectCell(colNum);
+        checkForVictory(colNum, rowNum);
+        checkForTie();
+        checkForMessage();
+        switchPlayer();
+
     }
 
-    newGame();
+    resetGame();
 })();
