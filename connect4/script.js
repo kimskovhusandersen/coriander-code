@@ -34,6 +34,16 @@
 
     function switchPlayer() {
         player = player ? 0 : 1;
+        // if (player == 0) {
+        // columns.on("click", loop);
+        // columns.on("mouseover", addHighlight);
+        // columns.on("mouseout", removeHighlight);
+        // } else {
+        // columns.off("click", loop);
+        // columns.off("mouseover", addHighlight);
+        // columns.off("mouseout", removeHighlight);
+        // loop();
+        // }
     }
 
     // This function returns a random color (rgb) as a string
@@ -139,10 +149,6 @@
         return newCollection;
     }
 
-    // This function takes an array of connected cells as argument
-    // and highlights them
-    // It also handles the mouseover columns event and highlight the first avilable
-    // cell in the column being hovered
     function addHighlight(connectedCells = []) {
         if (connectedCells.length > 0) {
             $.each(connectedCells, function(i, item) {
@@ -157,8 +163,6 @@
         }
     }
 
-    // This function handles the mouseout event and removes the highlight
-    // from them cell in the column being hovered
     function removeHighlight() {
         var colNum = columns.index($(event.currentTarget));
         var cell = getLegalMoves(colNum);
@@ -167,8 +171,6 @@
         }
     }
 
-    // This function checks whether the board is full
-    // and sets gameover and gametie to true if so.
     function checkForTie() {
         $.each(columns, function(i) {
             var lastCell = getCell(i, 0);
@@ -180,8 +182,6 @@
         });
     }
 
-    // This function checks for messages and shows the messageBoard, if
-    // there are any messages.
     function checkForMessage() {
         if (message.length > 0) {
             var color = player ? colorp0 : colorp1;
@@ -195,28 +195,23 @@
         }
     }
 
-
-    function checkForConnection(nestedArrToCheck) {
+    function checkForConnection(checkThis) {
         var connections = [];
-        var c = 0;
-        OUTER: for (var k = 0; k < nestedArrToCheck.length; k++) {
-            for (var m = 0; m < nestedArrToCheck[k].length; m++) {
-                if (nestedArrToCheck[k][m].hasClass(`p${player}`)) {
-                    c++;
-                    connections.push(nestedArrToCheck[k][m]);
+        OUTER: for (var m = 0; m < checkThis.length; m++) {
+            for (var i = 0; i < checkThis[m].length; i++) {
+                if (checkThis[m][i].hasClass(`p${player}`)) {
+                    connections.push(checkThis[m][i]);
                     if (connections.length === cellsToConnect) {
                         break OUTER;
                     }
                 } else {
                     connections = [];
-                    c = 0;
+                }
             }
         }
         return connections;
     }
 
-
-// This function resets all values back to starting values.
     function resetGame() {
         // Remove all classes
         $(".p0").removeClass("p0");
@@ -243,9 +238,6 @@
         columns.on("mouseout", removeHighlight);
     }
 
-    // This function serves as the game loop. Each turn is completed, when
-    // the loop is done.
-
     function loop() {
         var colNum, rowNum;
         // Declare a constructor function as template for each Move
@@ -256,14 +248,12 @@
 
         // select the cell
         selectCell(colNum);
->>>>>>> temp
         // Get four collections of cells, one for each direction that cells possibly are connected
         var colCells = fromColToArrCollection(columns.eq(colNum).children()); // cells in column
         var rowCells = fromColToArrCollection(board.find(`.row${rowNum}`));
         var diagCellsL = getDiaCellsLeft(colNum, rowNum); // cells diagonally from left to right
         var diagCellsR = getDiaCellsRight(colNum, rowNum); // cells diagonally from right to left
         // Add all four cell collections to a jQuery array
-
         var possibleConnectAllDirections = $([
             colCells,
             rowCells,
@@ -272,16 +262,12 @@
         ]);
 
         // Check if they are actually connected
-        var connect4 = checkForConnection(
-            possibleConnectAllDirections,
-            cellsToConnect
-        );
-
+        var connect4 = checkForConnection(possibleConnectAllDirections);
         console.log(connect4);
+
         // check if game is over
-        gameover = connect4.length === cellsToConnect ? true : false;
->>>>>>> temp
-        // check if game is tie
+        gameover = connect4.length == cellsToConnect ? true : false;
+        // check if game is tie.
         checkForTie();
         if (gameover) {
             // Disable selection of cells
@@ -289,14 +275,11 @@
             // Add hightligt to connected winner cells
             addHighlight(connect4);
             // Add a gameover message
-
             message = gametie
                 ? "It's a draw"
                 : `Player${player}!<br/>winner winner<br />funky chicken dinner`;
             // Show funky chicken in the background
             wrapper.addClass("gameover");
-            messageBoard.addClass("on");
-
             //Check for messages and display
             checkForMessage();
         } else {
@@ -304,7 +287,5 @@
         }
     }
 
-
->>>>>>> temp
     resetGame();
 })();
