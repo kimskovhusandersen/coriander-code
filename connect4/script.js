@@ -36,16 +36,6 @@
 
     function switchPlayer() {
         player = player ? 0 : 1;
-        if (player == 0) {
-            columns.on("click", loop);
-            columns.on("mouseover", addHighlight);
-            columns.on("mouseout", removeHighlight);
-        } else {
-            columns.off("click", loop);
-            // columns.off("mouseover", addHighlight);
-            // columns.off("mouseout", removeHighlight);
-            loop();
-        }
     }
 
     // This function returns a random color (rgb) as a string
@@ -151,6 +141,10 @@
         return newCollection;
     }
 
+    // This function takes an array of connected cells as argument
+    // and highlights them
+    // It also handles the mouseover columns event and highlight the first avilable
+    // cell in the column being hovered
     function addHighlight(connectedCells = []) {
         if (connectedCells.length > 0) {
             $.each(connectedCells, function(i, item) {
@@ -165,6 +159,8 @@
         }
     }
 
+    // This function handles the mouseout event and removes the highlight
+    // from them cell in the column being hovered
     function removeHighlight() {
         var colNum = columns.index($(event.currentTarget));
         var cell = getLegalMoves(colNum);
@@ -173,7 +169,8 @@
         }
     }
 
-
+    // This function checks whether the board is full
+    // and sets gameover and gametie to true if so.
     function checkForTie() {
         $.each(columns, function(i) {
             var lastCell = getCell(i, 0);
@@ -185,6 +182,8 @@
         });
     }
 
+    // This function checks for messages and shows the messageBoard, if
+    // there are any messages.
     function checkForMessage() {
         if (message.length > 0) {
             var color = player ? colorp0 : colorp1;
@@ -198,37 +197,124 @@
         }
     }
 
-    function checkForConnection(cC, cToC, player) {
-        var connections = $([]);
+    // This function takes a nested array, a number indicating the connected cells needed,
+    // and a player number as argument.
+    // It loop through each cell in the arrays and checks, if they are connected.
+    // It adds the connected cell to an array and returns the array,
+    // if the length matches with the numbers of cells To connect (cToC)
+    function checkForConnection(checkMe, cToC, player) {
+
+        var connections = [];
         var c = 0;
-        $.each(cC, function(j, cell) {
-            if ($(cell).length == 0) {
-                c = 0;
-                connections = $([]);
-            } else {
-                $.each(cell, function(i, item) {
-                    if ($(item).hasClass(`p${player}`) || $(item).hasClass("ai")) {
-                        c++;
-                        connections.push($(item));
-                        if (c === cToC) {
-                            return false;
-                        }
-                    } else {
-                        connections = $([]);
-                        c = 0;
+        for (var i = 0; i < checkMe.length; i++) {
+            for (var j = 0; j < checkMe[i].length; j++) {
+                if (checkMe[i][j].hasClass(`p${player}`)) {
+                    c++;
+                    // console.log(checkMe[i][j]);
+                    connections.push(checkMe[i][j]);
+                    if (connections.length == cToC) {
+                        return connections;
                     }
-                });
+                } else {
+                    connections = []
+                    c = 0;
+                }
+
             }
-        });
-        if (connections.length == cToC) {
-            return connections;
         }
     }
 
+    // This function evaluates all currently legal moves and returns an array
+    // containing all possible moves as objects. Each object has its own
+    // score, colNum, rowNum, and cells connected.
+    function getBestMoves() {
 
+        // get all legal moves
+        var legalMoves = getLegalMoves();
 
+        var bestMoves = [],
+            playerBestMoves = [],
+            betterMoves = [],
+            playerBetterMoves = [],
+            goodMoves = [],
+            netraulMoves = [];
 
+        var availableMoves = [bestMoves, playerBestMoves, betterMoves, playerBetterMoves, goodMoves, netraulMoves];
+        // loop through each legal move (maximum 7)
+        $.each(legalMoves, function(i, item) {
+            var colNum = getColNumber(item);
+            var rowNum = getRowNumber(getLegalMoves(colNum));
 
+            // Get four collections of cells, one for each direction that cells possibly are connected
+            var colCells = fromColToArrCollection(columns.eq(colNum).children()); // cells in column
+            var rowCells = fromColToArrCollection(board.find(`.row${rowNum}`));
+            var diagCellsL = getDiaCellsLeft(colNum, rowNum); // cells diagonally from left to right
+            var diagCellsR = getDiaCellsRight(colNum, rowNum); // cells diagonally from right to left
+            // Add all four cell collections to a jQuery array
+            var possibleConnectAllDirections = $([colCells, rowCells, diagCellsL, diagCellsR]);
+            // Loop through each possible connection with checkForConnection
+
+            var score;
+            // Computer's move
+            var connect4 = checkForConnection(possibleConnectAllDirections, 4, 1);
+            if (connect4 !== undefined) {
+                colNum = getColNumber(connect4[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+                score = 9999;
+                var bestMove = new Move(colNum, rowNum, connect4, score);
+                bestMoves.push(bestMove);
+            }
+            var connect3 = checkForConnection(possibleConnectAllDirections, 3, 1);
+            if (connect3 !== undefined) {
+                colNum = getColNumber(connect3[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+
+                score = 4;
+                var goodMove = new Move(colNum, rowNum, connect3, score);
+                betterMoves.push(goodMove);
+            }
+            var connect2 = checkForConnection(possibleConnectAllDirections, 2, 1);
+            // console.log(connect2);
+            if (connect2 !== undefined) {
+                colNum = getColNumber(connect2[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+
+                score = 2;
+                var okMove = new Move(colNum, rowNum, connect2, score);
+                goodMoves.push(okMove);
+            }
+            var connect1 = checkForConnection(possibleConnectAllDirections, 1, 1);
+            if (connect1 !== undefined) {
+                colNum = getColNumber(connect1[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+                score = 0;
+                var insignificantMoves = new Move(colNum, rowNum, connect1, score);
+                netraulMoves.push(insignificantMoves);
+            }
+            // Player's moves
+            var connect4Player = checkForConnection(possibleConnectAllDirections, 3, 0);
+            if (connect4Player !== undefined) {
+                colNum = getColNumber(connect4Player[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+
+                score = -9999;
+                var playerBestMove = new Move(colNum, rowNum, connect4Player, score);
+                playerBestMoves.push(playerBestMove);
+            }
+            var connect3Player = checkForConnection(possibleConnectAllDirections, 2, 0);
+            if (connect3Player !== undefined) {
+                colNum = getColNumber(connect3Player[0]);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+                score = -4;
+                var playerBetterMove = new Move(colNum, rowNum, connect3Player, score);
+                playerBetterMoves.push(playerBetterMove);
+            }
+
+        });
+        return availableMoves;
+    }
+
+    // This function resets all values back to starting values.
     function resetGame() {
         // Remove all classes
         $(".p0").removeClass("p0");
@@ -255,170 +341,80 @@
         columns.on("mouseout", removeHighlight);
     }
 
-
-
+    // This function serves as the game loop. Each turn is completed, when
+    // the loop is done.
     function loop() {
-
         var colNum, rowNum;
-        // Declare a constructor function as template for each Move
-
         if (player == 1) {
 
-            // get all legal moves
-            var legalMoves = getLegalMoves();
-            var bestMoves = [],
-                playerBestMoves = [],
-                betterMoves = [],
-                playerBetterMoves = [],
-                goodMoves = [],
-                netraulMoves = [];
+            columns.off("mouseover", addHighlight);
+            columns.off("mouseout", removeHighlight);
 
-            var availableMoves = [bestMoves, playerBestMoves, betterMoves, playerBetterMoves, goodMoves, netraulMoves];
-            // loop through each legal move (maximum 7)
-            $.each(legalMoves, function(i, item) {
-                var colNum = getColNumber(item);
-                var rowNum = getRowNumber(getLegalMoves(colNum));
+            var bestMoves = getBestMoves();
 
-                // Add temporary class for including possible cell in count
-                var cell = getLegalMoves(colNum); // object
-                if (cell[0] !== undefined) {
-                    cell[0].addClass('ai');
+            // Select a random move from the highest prioritized array that is not empty.
+            for (var r = 0; r < bestMoves.length; r++) {
+                if (bestMoves[r].length === 0) {
+                    continue;
+                } else {
+                    var i = Math.floor(Math.random() * bestMoves[r].length);
+                    colNum = bestMoves[r][i].colNum;
+                    rowNum = bestMoves[r][i].rowNum;
+                    break;
                 }
-                // Get four collections of cells, one for each direction that cells possibly are connected
-                var colCells = fromColToArrCollection(columns.eq(colNum).children()); // cells in column
-                var rowCells = fromColToArrCollection(board.find(`.row${rowNum}`));
-                var diagCellsL = getDiaCellsLeft(colNum, rowNum); // cells diagonally from left to right
-                var diagCellsR = getDiaCellsRight(colNum, rowNum); // cells diagonally from right to left
-                // Add all four cell collections to a jQuery array
-                var possibleConnectAllDirections = $([colCells, rowCells, diagCellsL, diagCellsR]);
-                // Loop through each possible connection with checkForConnection
-
-                console.log(diagCellsR);
-                var score;
-
-                // Computer's move
-                var connect4 = checkForConnection(possibleConnectAllDirections, 4, 1);
-                if (connect4 !== undefined) {
-                    colNum = getColNumber(connect4[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-                    score = 9999;
-                    var bestMove = new Move(colNum, rowNum, connect4, score);
-                    bestMoves.push(bestMove);
-                }
-                var connect3 = checkForConnection(possibleConnectAllDirections, 3, 1);
-                if (connect3 !== undefined) {
-                    colNum = getColNumber(connect3[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-
-                    score = 4;
-                    var goodMove = new Move(colNum, rowNum, connect3, score);
-                    betterMoves.push(goodMove);
-                }
-                var connect2 = checkForConnection(possibleConnectAllDirections, 2, 1);
-                if (connect2 !== undefined) {
-                    colNum = getColNumber(connect2[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-
-                    score = 2;
-                    var okMove = new Move(colNum, rowNum, connect2, score);
-                    goodMoves.push(okMove);
-                }
-                var connect1 = checkForConnection(possibleConnectAllDirections, 1, 1);
-                if (connect1 !== undefined) {
-                    colNum = getColNumber(connect1[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-                    score = 0;
-                    var insignificantMoves = new Move(colNum, rowNum, connect1, score);
-                    netraulMoves.push(insignificantMoves);
-                }
-                // Player's moves
-                var connect4Player = checkForConnection(possibleConnectAllDirections, 3, 0);
-                if (connect4Player !== undefined) {
-                    colNum = getColNumber(connect4Player[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-
-                    score = -9999;
-                    var playerBestMove = new Move(colNum, rowNum, connect4Player, score);
-                    playerBestMoves.push(playerBestMove);
-                }
-                var connect3Player = checkForConnection(possibleConnectAllDirections, 2, 0);
-                if (connect3Player !== undefined) {
-                    colNum = getColNumber(connect3Player[0]);
-                    rowNum = getRowNumber(getLegalMoves(colNum));
-
-                    score = -4;
-                    var playerBetterMove = new Move(getColNumber(connect3Player), rowNum, connect3Player, score);
-                    playerBetterMoves.push(playerBetterMove);
-                }
-                // Remove temporary class for including possible cell in count
-                if (cell[0] !== undefined) {
-                    cell[0].removeClass('ai');
-                }
-            });
-
-
-            // compare scores
-
-            // Subtract player score from computer score for each legal move
-
-            // Select the move with the highest score
-
-            console.log(availableMoves);
-            if (gameover) {
-                // Disable selection of cells
-                columns.off("click", loop);
-                // Add hightligt to connected winner cells
-                addHighlight(connect4);
-                // Add a gameover message
-                message = gametie ? "It's a draw" : `Player${player}!<br/>winner winner<br />funky chicken dinner`;
-                // Show funky chicken in the background
-                wrapper.addClass('gameover');
-                //Check for messages and display
-                checkForMessage();
-            } else {
-                switchPlayer();
             }
+            if (colNum === undefined) {
+                colNum = Math.ceil(grid[0] / 2);
+                rowNum = getRowNumber(getLegalMoves(colNum));
+            }
+            // select the cell
+            selectCell(colNum);
 
         } else
         if (player == 0) {
-
             // Get the selected column and row number
             colNum = getColNumber($(event.currentTarget));
             rowNum = getRowNumber(getLegalMoves(colNum));
+            columns.on('click', function() {
+
+            });
+            columns.on("mouseover", addHighlight);
+            columns.on("mouseout", removeHighlight);
 
             // select the cell
             selectCell(colNum);
-            // Get four collections of cells, one for each direction that cells possibly are connected
-            var colCells = fromColToArrCollection(columns.eq(colNum).children()); // cells in column
-            var rowCells = fromColToArrCollection(board.find(`.row${rowNum}`));
-            var diagCellsL = getDiaCellsLeft(colNum, rowNum); // cells diagonally from left to right
-            var diagCellsR = getDiaCellsRight(colNum, rowNum); // cells diagonally from right to left
-            // Add all four cell collections to a jQuery array
-            var possibleConnectAllDirections = $([colCells, rowCells, diagCellsL, diagCellsR]);
+        }
 
-            // Check if they are actually connected
-            var connect4 = checkForConnection(possibleConnectAllDirections, cellsToConnect);
-            // check if game is over
-            gameover = connect4 ? true : false;
-            // check if game is tie
-            checkForTie();
-            if (gameover) {
-                // Disable selection of cells
-                columns.off("click", loop);
-                // Add hightligt to connected winner cells
-                addHighlight(connect4);
-                // Add a gameover message
-                message = gametie ? "It's a draw" : `Player${player}!<br/>winner winner<br />funky chicken dinner`;
-                // Show funky chicken in the background
-                wrapper.addClass('gameover');
-                //Check for messages and display
-                checkForMessage();
-            } else {
-                switchPlayer();
-            }
+        console.log(colNum, rowNum);
+        // Get four collections of cells, one for each direction that cells possibly are connected
+        var colCells = fromColToArrCollection(columns.eq(colNum).children()); // cells in column
+        var rowCells = fromColToArrCollection(board.find(`.row${rowNum}`));
+        var diagCellsL = getDiaCellsLeft(colNum, rowNum); // cells diagonally from left to right
+        var diagCellsR = getDiaCellsRight(colNum, rowNum); // cells diagonally from right to left
+        // Add all four cell collections to a jQuery array
+        var possibleConnectAllDirections = $([colCells, rowCells, diagCellsL, diagCellsR]);
+
+        // Check if they are actually connected
+        var connect4 = checkForConnection(possibleConnectAllDirections, cellsToConnect);
+        // check if game is over
+        gameover = connect4 ? true : false;
+        // check if game is tie
+        checkForTie();
+        if (gameover) {
+            // Disable selection of cells
+            columns.off("click", loop);
+            // Add hightligt to connected winner cells
+            addHighlight(connect4);
+            // Add a gameover message
+            message = gametie ? "It's a draw" : `Player${player}!<br/>winner winner<br />funky chicken dinner`;
+            // Show funky chicken in the background
+            wrapper.addClass('gameover');
+            //Check for messages and display
+            checkForMessage();
+        } else {
+            switchPlayer();
         }
     }
-
 
 
     resetGame();
