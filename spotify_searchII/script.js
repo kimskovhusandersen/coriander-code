@@ -3,7 +3,7 @@
 // Method 1
 // location.href (returns the full query string)
 // location.protocol (returns the protocol, fx http or https)
-// locacation.search.indexOf('scroll=infinite') // returns 1 if true and 0 if false
+// location.search.indexOf('scroll=infinite') // returns 1 if true and 0 if false
 // this solution is fine for our purpose, but in real life, it's to risky,
 // because "https://something.com?scroll=infinitebutnotreally" also returns 1
 
@@ -45,12 +45,7 @@
     var resultsContainer = document.getElementById("results-container");
     var baseUrl = "https://elegant-croissant.glitch.me/spotify";
     var nextUrl, html, height, scrollHeight, scrollTop;
-
-    document.addEventListener("scroll", function() {
-        height = window.innerHeight;
-        scrollHeight = document.body.scrollHeight;
-        scrollTop = window.pageYOffset;
-    });
+    // var isScrolling = false;
 
     try {
         var jsonInput = localStorage.getItem("input");
@@ -92,8 +87,13 @@
                 html = generateHtml(payload, html);
                 // Append the html to the results container
                 resultsContainer.innerHTML += html;
-                // initiate infite scroll
-                didScrollToBot();
+                // Check if "scroll=infinite" is in the query string
+                if (location.search.indexOf("scroll=infinite") == 1) {
+                    moreBtn.style.visibility = "hidden";
+                    didScrollToBot();
+                } else {
+                    moreBtn.style.visibility = "visible";
+                }
             },
             error: function() {
                 console.log("something went wrong");
@@ -112,8 +112,13 @@
                 html = generateHtml(payload, html);
                 // Append the html to the results container
                 resultsContainer.innerHTML += html;
-                // initiate infite scroll
-                didScrollToBot();
+
+                if (location.search.indexOf("scroll=infinite") == 1) {
+                    moreBtn.style.visibility = "hidden";
+                    didScrollToBot();
+                } else {
+                    moreBtn.style.visibility = "visible";
+                }
             },
             error: function() {
                 console.log("something went wrong");
@@ -133,11 +138,9 @@
                 "https://api.spotify.com/v1/search",
                 baseUrl
             );
-            // moreBtn.style.visibility = "visible";
+        } else {
+            moreBtn.style.visibility = "hidden";
         }
-        // else {
-        //     moreBtn.style.visibility = "hidden";
-        // }
 
         // Check if there's a result
         var items = payload.items;
@@ -182,6 +185,7 @@
         </a>`;
             }
         }
+
         return html;
     }
 
@@ -189,6 +193,9 @@
     // and triggers a click on the "more" button, when the condition is true.
     // If the condition is false, the function gets called 500ms later again.
     function didScrollToBot() {
+        height = window.innerHeight;
+        scrollHeight = document.body.scrollHeight;
+        scrollTop = window.pageYOffset;
         if (height * 1.75 + scrollTop > scrollHeight) {
             moreBtn.click();
         } else {
