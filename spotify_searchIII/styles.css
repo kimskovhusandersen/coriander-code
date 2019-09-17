@@ -69,6 +69,10 @@ a {
     border-bottom: 15px solid rgba(0, 0, 0, 0.2);
 }
 
+#headline {
+    margin-left: 4px;
+}
+
 .item {
     border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -101,8 +105,4 @@ a {
     top: 50%;
     transform: translateY(-50%);
     padding-left: 5%;
-}
-
-.no-result {
-    margin-left: 4px;
 }

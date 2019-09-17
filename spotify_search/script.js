@@ -25,52 +25,48 @@
         } catch (e) {
             console.log(e);
         }
-        if (inputValue.length > 0) {
-            $.ajax({
-                url: baseUrl,
-                method: "GET",
-                data: {
-                    q: inputValue,
-                    type: dropdown
-                },
-                success: function(payload) {
-                    // Empty result container and reset the html string
-                    resultsContainer.innerHTML = "";
-                    var html = "";
-                    // Add a headline for the search result
-                    html += `<h2>Results for "${inputValue}"</h2>`;
-                    html = generateHtml(payload, html);
-                    // Append the html to the results container
-                    resultsContainer.innerHTML += html;
-                },
-                error: function() {
-                    console.log("something went wrong");
-                }
-            });
-        } else {
-            // If user input is empty, but user presses submit
-            // then show "no result"
+        // If user input is empty, but user presses submit then show "no result"
+        if (inputValue.length == 0) {
             html = `<div class="no-result">No result</div>`;
             resultsContainer.innerHTML = html;
+            return;
         }
+        $.ajax({
+            url: baseUrl,
+            method: "GET",
+            data: {
+                q: inputValue,
+                type: dropdown
+            },
+            success: function(payload) {
+                // Empty result container and reset the html string
+                resultsContainer.innerHTML = "";
+                var html = "";
+                // Add a headline for the search result
+                html += `<h2>Results for "${inputValue}"</h2>`;
+                html = generateHtml(payload, html);
+                // Append the html to the results container
+                resultsContainer.innerHTML += html;
+            },
+            error: function() {
+                console.log("something went wrong");
+            }
+        });
     });
 
     moreBtn.addEventListener("click", function() {
-        var inputValue = userInput.value;
-        if (nextUrl) {
-            $.ajax({
-                url: nextUrl,
-                method: "GET",
-                success: function(payload) {
-                    var html = "";
-                    html = generateHtml(payload, html);
-                    resultsContainer.innerHTML += html;
-                },
-                error: function() {
-                    console.log("something went wrong");
-                }
-            });
-        }
+        $.ajax({
+            url: nextUrl,
+            method: "GET",
+            success: function(payload) {
+                var html = "";
+                html = generateHtml(payload, html);
+                resultsContainer.innerHTML += html;
+            },
+            error: function() {
+                console.log("something went wrong");
+            }
+        });
     });
 
     // This function takes a ajax object from Spotify and an string variable named html
@@ -123,7 +119,9 @@
 
                 html += `<a href="${extUrl}">
             <div class="item">
-                <img src="${image}" alt="${name}" />
+                <div class="image-container">
+                    <img src="${image}" alt="${name}" />
+                </div>
                 <div class="name">
                     <p>${name}</p>
                 </div>
