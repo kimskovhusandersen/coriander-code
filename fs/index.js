@@ -38,9 +38,14 @@
                 for (let i = 0; i < files.length; i++) {
                     if (files[i].isFile()) {
                         let name = files[i].name;
-                        let stats = fs.statSync(`${path}/${files[i].name}`);
-                        let size = `${stats.size}`;
-                        console.log(`${path}/${name}: ${size}`); // this works!
+                        fs.stat(`${path}/${name}`, function(err, stats) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                let size = `${stats.size}`;
+                                console.log(`${path}/${name}: ${size}`); // this works!
+                            }
+                        });
                     } else if (files[i].isDirectory()) {
                         let newPath = `${path}/${files[i].name}`;
                         logSizes(newPath);
@@ -65,16 +70,14 @@
             for (let i = 0; i < files.length; i++) {
                 // if file: add property (key: filename, value: filesize)(use the statSync method)
                 // if folder. add property (object)
+                let name = files[i].name;
                 if (files[i].isFile()) {
-                    let name = files[i].name;
-                    let stats = fs.statSync(`${path}/${files[i].name}`);
+                    let stats = fs.statSync(`${path}/${name}`);
                     let size = `${stats.size}`;
                     obj[`${name}`] = size;
-                    // output += `${path}/${name}: ${size}`; // this works!
                 } else if (files[i].isDirectory()) {
-                    let name = files[i].name;
                     obj[`${name}`] = {};
-                    let newPath = `${path}/${files[i].name}`;
+                    let newPath = `${path}/${name}`;
                     mapSizes(newPath, obj[`${name}`]);
                 }
             }
