@@ -5,15 +5,15 @@
         input: process.stdin,
         output: process.stdout
     });
-    const line = "--------------------------------------";
-
     function Player() {
         this.name;
         this.playerSay = phrase => chalk.cyan(phrase);
         this.futurePlayerSay = phrase => chalk.magenta(phrase);
     }
 
-    let player = new Player();
+    const player = new Player();
+
+    const line = "--------------------------------------";
 
     const q1 = `${line}
 A loud, abrupt noise grumbled its way
@@ -160,10 +160,10 @@ ${line}
 Your answer? `;
 
     const followTheTrail = {
-        q: q4a,
+        ask: q4a,
         answers: {
             "grab a spraycan": {
-                q: q5a,
+                ask: q5a,
                 answers: {
                     "go to the mechanical room": `
 Well, the only way out is through the mechanical room, but the door's always locked.
@@ -184,7 +184,7 @@ I'm out.. Good luck with the killing!
         }
     };
     const searchForClues = {
-        q: q4b,
+        ask: q4b,
         answers: {
             "call the police": `
 to be continued...
@@ -195,21 +195,24 @@ to be continued...
         }
     };
 
+    function defaultResponse(answer) {
+        return `
+Now is probably not the best time to ${answer}..
+You've got another chance to make up your mind. Choose wisely this time!
+`;
+    }
+
     const introduction = {
-        q: q1,
+        ask: q1,
         answers: {
             investigate: {
-                q: q2,
+                ask: q2,
+                restrictions: "match",
                 answers: {
-                    "try to peek": {
-                        q: q3,
-                        answers: {
-                            "follow the trail": followTheTrail,
-                            "search for clues": searchForClues
-                        }
-                    },
-                    "burst in the door": {
-                        q: q3,
+                    "try to peek": {},
+                    "burst in the door": {},
+                    continue: {
+                        ask: q3,
                         answers: {
                             "follow the trail": followTheTrail,
                             "search for clues": searchForClues
@@ -217,37 +220,60 @@ to be continued...
                     }
                 }
             },
-            "go back to sleep": `
-Alright then. Good luck falling asleep now!
-`
+            "go back to sleep": "Alright then. Good luck falling asleep now!"
         }
     };
 
-    function askQuestion(convObj) {
-        rl.question(chalk.cyan(convObj.q), function(answer) {
-            if (typeof convObj.answers[answer] === "string") {
-                console.log(chalk.yellow(convObj.answers[answer]));
-                rl.close();
-                return;
-            } else if (typeof convObj.answers[answer] === "object") {
-                convObj = convObj.answers[answer];
-                console.log(
-                    chalk.green(`
-Wow, I hope you are wearing your big boys pyjamas...
-Alright then. Let's ${answer}!
-                `)
-                );
-                askQuestion(convObj);
-            } else {
-                console.log(
-                    chalk.red(`
-Now is probably not the best time to ${answer}..
-You've got another chance to make up your mind. Choose wisely this time!
-`)
-                );
-                askQuestion(convObj);
+    function askForName(obj) {
+        rl.question(chalk.cyan("What's your name, solder?"), function(answer) {
+            if (answer && obj.restrictions == "none") {
+                player.name = answer;
+                askQuestion(obj.answers.continue);
             }
         });
+    }
+
+    function askQuestion(obj) {
+        // Check if the answer holds a function and
+        // execute it if it does.
+        // Functions are useful when we need to store the user's answer for later
+        if (typeof obj.ask == "function") {
+            obj.ask(obj);
+        } else {
+            let question = eval("`" + obj.ask + "`");
+            rl.question(chalk.cyan(question), function(answer) {
+                // Any answer is a legal answer
+                // Usage: This type of verification is useful, when
+                // asking the user to submit user data
+                if (answer && obj.restrictions === "none") {
+                    askQuestion(obj.answers.continue);
+                }
+                // no matter which answer is matched, it should continue down the same road:
+                // Usage: this type of verification is useful, when
+                // the user is asked to select an option, but the response
+                // doesn't change the story line.
+                else if (
+                    obj.answers[answer] &&
+                    typeof obj.answers[answer] == "object" &&
+                    obj.restrictions === "match"
+                ) {
+                    askQuestion(obj.answers.continue);
+                }
+                // When there has to be an exact match between
+                // the answer and the name of the property,
+                // obj.restrictions will be undefined.
+                else if (typeof obj.answers[answer] === "object") {
+                    askQuestion(obj.answers[answer]);
+                } else if (typeof obj.answers[answer] === "string") {
+                    console.log(chalk.yellow(obj.answers[answer]));
+                    rl.close();
+                    return;
+                } else {
+                    console.log(chalk.red(defaultResponse(answer)));
+                    askQuestion(obj);
+                }
+            });
+        }
     }
 
     askQuestion(introduction);

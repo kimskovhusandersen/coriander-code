@@ -54,7 +54,7 @@
             }
         });
     }
-    logSizes(path);
+    // logSizes(path);
 
     // Part 2
     const obj = {};
@@ -86,10 +86,48 @@
         }
         return obj;
     }
-    const data = mapSizes(path, obj);
-    fs.writeFileSync(`${__dirname}/files.json`, JSON.stringify(data, null, 4));
-})();
+    // const data = mapSizes(path, obj);
+    // fs.writeFileSync(`${__dirname}/files.json`, JSON.stringify(data, null, 4));
 
+    // Part 3
+    let obj3 = {};
+    function logSizes3(path) {
+        return new Promise(function(resolve, reject) {
+            fs.readdir(path, { withFileTypes: true }, function(err, files) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(files);
+                }
+            });
+        });
+    }
+    logSizes3(path)
+        .then(function(files) {
+            console.log(files);
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].isFile()) {
+                    let name = files[i].name;
+                    if (files[i].isFile()) {
+                        let stats = fs.statSync(`${path}/${name}`);
+                        let size = `${stats.size}`;
+                        // obj[`${name}`] = size;
+                        console.log(name, size);
+                    } else if (files[i].isDirectory()) {
+                        obj[`${name}`] = {};
+                        let newPath = `${path}/${name}`;
+                        logSizes3(newPath);
+                    }
+                }
+            }
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
+    // logSizes3(path);
+    // console.log(data);
+})();
 // const leo = {
 //     name: "Leonardo",
 //     age: 45,
