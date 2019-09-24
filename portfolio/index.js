@@ -38,15 +38,12 @@ http.createServer((req, res) => {
         res.end(html);
     }
     if (pathModule.extname(req.url)) {
-        console.log(pathModule.extname(req.url));
         reqUrl = allowedUrls[req.url];
     } else if (!req.url.endsWith("/")) {
-        console.log("adding /:", req.url);
         res.setHeader("Location", `${req.url}/`);
         res.statusCode = 301;
         return res.end();
     } else {
-        console.log("ending with /:", req.url, allowedUrls[req.url]);
         reqUrl = allowedUrls[req.url];
     }
     if (!reqUrl) {

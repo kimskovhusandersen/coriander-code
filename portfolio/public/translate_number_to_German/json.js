@@ -26,6 +26,7 @@
         ];
         try {
             var num = askForNumber();
+            console.log(translation[num]);
             return translation[num];
         } catch (e) {
             console.log(`You should enter a number between 1-10. ${e}`);
