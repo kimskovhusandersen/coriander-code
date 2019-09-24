@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Authors with handlebars</title>
+</head>
+
+<body>
+    <div id="authors-info"></div>
+
+    <script id="authors" type="text/x-handlebars-template">
+        <div class="container">
+            {{#each authors}}
+            <div class="card">
+                <div class="image-wrapper">
+                    <img src='{{photo}}'>
+                </div>
+                <h2>{{name}}</h2>
+
+                <section>
+                    <div class="properties">Born: {{born}}</div>
+                    <div class="properties">Died: {{died}}</div>
+                    <div class="properties quote"><span class="q">‘‘</span>{{quote}}<span class="q">’’</span></div>
+
+                </section>
+
+                <section>
+                    <div class="properties">Selected Writings:</div>
+                    <ul>
+                        {{#each selectedWritings}}
+                        <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </section>
+
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

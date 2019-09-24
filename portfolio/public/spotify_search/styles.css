@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia;
+}
+
+body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(35, 207, 95, 0.2);
+    font-weight: bold;
+    color: #23CF5F;
+}
+
+#wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75vw;
+}
+
+#wrapper>* {
+    width: 75%;
+    padding: 4px;
+    margin: 3px;
+    border-radius: 4px;
+    border-color: rgba(35, 207, 95, 0.7);
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+    font-size: 18px;
+    margin-bottom: 5px;
+    padding: 0 0 5px 3px;
+}
+
+a {
+    text-decoration: none;
+    color: #23CF5F;
+}
+
+#user-input {}
+
+.artist-or-album {}
+
+#submit-button, #more-button {
+    background-color: #23CF5F;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#more-button {
+    visibility: hidden;
+}
+
+#results-container {
+    padding: 10px 0;
+    background-color: white;
+    /* border-top: 4px solid rgba(0, 0, 0, 0.3); */
+    border-bottom: 15px solid rgba(0, 0, 0, 0.2);
+}
+
+#headline {
+    margin-left: 4px;
+}
+
+.item {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    display: flex;
+    height: 110px;
+    margin: 5px 0;
+    align-items: center;
+}
+
+.image-container {
+    height: 100%;
+    width: 35%;
+}
+
+.item img {
+    width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.item .name {
+    width: 55%;
+    height: 100%;
+    position: relative;
+}
+
+.name p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: 5%;
+}
