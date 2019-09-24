@@ -35,7 +35,7 @@ http.createServer((req, res) => {
         html += "</ul>";
         res.setHeader("content-type", "text/html");
         res.statusCode = 200;
-        res.end(html);
+        return res.end(html);
     }
     if (pathModule.extname(req.url)) {
         reqUrl = allowedUrls[req.url];
