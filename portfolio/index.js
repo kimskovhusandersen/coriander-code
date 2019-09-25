@@ -50,6 +50,7 @@ http.createServer((req, res) => {
         res.statusCode = 404;
         return res.end();
     }
+
     const contentType = exts[pathModule.extname(reqUrl)];
     res.setHeader("Content-Type", contentType);
     const readStream = fs.createReadStream(reqUrl);

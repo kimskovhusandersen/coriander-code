@@ -1,0 +1,24 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+h3 {
+    width: 100%;
+    text-align: center;
+    padding: 1vh;
+}
+
+textarea {
+    position: absolute;
+    display: block;
+    height: 30vh;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
