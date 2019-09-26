@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    font-family: "Georgia pro", "serif";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    position: relative;
+    /* width: 600px; */
+    /* border: 3px dotted orange; */
+}
+
+header {
+    width: 100%;
+    height: 65px;
+    position: relative;
+}
+
+.sprint {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 150px;
+    /* border: 1px solid green; */
+}
+
+.sprint img {
+    width: 100%;
+    height: auto;
+}
+
+.hamburger {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1%;
+    width: 35px;
+    /* border: 1px solid green; */
+}
+
+.hamburger img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    visibility: hidden;
+    /* transition solution */
+    transition: 2s;
+    z-index: 2;
+    cursor: pointer;
+}
+
+#side-nav {
+    position: absolute;
+    top: 0;
+    right: -20%;
+    width: 20%;
+    padding: 5px;
+    height: 100%;
+    background-color: white;
+    visibility: hidden;
+    /* transition solution */
+    transition: 2s;
+    cursor: default;
+    /* border: 1px solid LimeGreen; */
+}
+
+.nav-element {
+    padding: 10px;
+    color: #83A2FF;
+    /* font-weight: 400; */
+    font-size: 26px;
+    /* border: 1px solid green; */
+}
+
+.nav-element.close {
+    color: black;
+    font-family: "Roboto", arial, sans-serif;
+    text-align: right;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.nav-element.logout {
+    font-size: 16px;
+    padding-top: 30px;
+}
+
+.nav-element a {
+    text-decoration: none;
+}
+
+.nav-element a:hover {
+    text-decoration: underline;
+}
+
+.on {
+    transition-property: transform;
+    transition-duration: 2s;
+    transform: translateX(-100%);
+}
+
+.hero {
+    /* border: 4px solid red; */
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hero .inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    width: 75%;
+    z-index: 1;
+    text-align: center;
+    /* border: 3px solid red; */
+}
+
+.hero .inner h1 {
+    font-style: italic;
+    margin: 5% 0;
+    font-size: 4vw;
+}
+
+.hero .inner button {
+    border: 3px solid #cc6600;
+    border-radius: 25em;
+    background-color: #ffcc33;
+    color: #cc6600;
+    width: 40%;
+    padding: 0.5em 1em;
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.features {
+    background-color: #ccc;
+    height: 300px;
+    position: relative;
+    width: 100%;
+    /* border: 4px solid red; */
+}
+
+.features .inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    transform: translate(-50%, -50%);
+    /* border: 3px solid red; */
+}
+
+.item {
+    width: 50%;
+    height: 150px;
+    float: left;
+    /* border: 3px solid navy; */
+}
+
+.item-img {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    float: left;
+    /* border: 1px solid orange; */
+}
+
+.item-img img {
+    margin: 25%;
+    /* border: 1px solid gold; */
+}
+
+.item-text {
+    width: 75%;
+    height: 100%;
+    float: left;
+    padding-top: 5%;
+    /* border: 4px solid green; */
+}
+
+.item-text h3 {
+    font-size: 20px;
+}
+
+.item-text p {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #666;
+    padding: 1%;
+    color: white;
+    font-size: 1.1vw;
+}
+
+footer div {
+    margin-left: 3%;
+}
+
+@media screen and (min-width: 481px) and (max-width: 720px) {
+    .hero .inner h1 {
+        font-size: 6vw;
+    }
+
+    .hero .inner button {
+        font-size: 2.5vw;
+    }
+
+    .nav-element {
+        padding: 8px;
+        font-size: 20px;
+    }
+
+    .nav-element.logout {
+        font-size: 12px;
+        padding-top: 20px;
+    }
+
+    .features {
+        height: 400px;
+    }
+
+    .item {
+        width: 100%;
+        height: 100px;
+    }
+
+    .item-text h3 {
+        font-size: 2.5vw;
+    }
+
+    .item-text p {
+        font-size: 2.1vw;
+    }
+
+    footer {
+        font-size: 1.9vw;
+    }
+}

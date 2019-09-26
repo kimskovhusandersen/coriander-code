@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.wrapper {
+    position: absolute;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 98%;
+    margin: 0 1%;
+}
+
+header.header {
+    height: 150px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.logo {
+    position: relative;
+    height: 100%;
+    width: 40%;
+    float: left;
+}
+
+.logo img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.search {
+    position: relative;
+    width: 56%;
+    height: 100%;
+    float: right;
+    margin-left: 4%;
+    background-image: url("./assets/github-headers.png");
+}
+
+.inputs {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    width: 55%;
+    float: left;
+}
+
+.search input {
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    display: block;
+    padding: 4px;
+}
+
+.search button {
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    width: 35%;
+    transform: translateY(-50%);
+    height: 55%;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    color: rgb(0, 150, 150);
+    background-color: rgba(0, 150, 255, 0.5);
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.search button:hover {
+    color: rgb(90, 90, 150);
+    background-color: rgba(0, 150, 255, 0.55);
+}
+
+.item {
+    height: 300px;
+    width: 33%;
+    float: left;
+    display: inline-block;
+    transition: 2s;
+}
+
+.item.on {
+    width: 100%;
+    transition: 2s
+}
+
+.image-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* width: 40%; */
+    float: left;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    z-index: 1;
+    transition: 2s;
+}
+
+.image-container.on {
+    width: 40%;
+    transition: 2s
+}
+
+.image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.repo-name {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.repo-name p {
+    font-family: "Cardo", serif;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    margin-left: 5%;
+    color: rgb(245, 245, 245);
+    transform: translateY(-50%);
+}
+
+.commits-container {
+    float: left;
+    background-color: #434343;
+    background-image: linear-gradient(#434343, #282828);
+    width: 59%;
+    margin-left: 1%;
+    height: 100%;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    transform: translateX(-65%);
+    visibility: hidden;
+    transition: 2s;
+}
+
+.commits-container.on {
+    transform: translateX(0%);
+    visibility: visible;
+    transition: 2s
+}
+
+.commits {
+    width: 100%;
+    height: 100%;
+    font-family: "Oswald", sans-serif;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: transparent;
+    background-image: linear-gradient(0deg,
+            transparent 24%,
+            rgba(255, 255, 255, 0.05) 25%,
+            rgba(255, 255, 255, 0.05) 26%,
+            transparent 27%,
+            transparent 74%,
+            rgba(255, 255, 255, 0.05) 75%,
+            rgba(255, 255, 255, 0.05) 76%,
+            transparent 77%,
+            transparent),
+        linear-gradient(90deg,
+            transparent 24%,
+            rgba(255, 255, 255, 0.05) 25%,
+            rgba(255, 255, 255, 0.05) 26%,
+            transparent 27%,
+            transparent 74%,
+            rgba(255, 255, 255, 0.05) 75%,
+            rgba(255, 255, 255, 0.05) 76%,
+            transparent 77%,
+            transparent);
+    background-size: 50px 50px;
+    color: rgb(220, 220, 255);
+}
+
+.commits h3 {
+    padding: 7px 0;
+}
+
+.commits>* {
+    margin-left: 5%;
+}
+
+.commit {
+    font-size: 0.8em;
+    padding: 3px 0;
+    font-weight: lighter;
+}
