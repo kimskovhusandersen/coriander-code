@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+}
+
+h3 {
+    width: 100%;
+    text-align: center;
+    padding: 1vh;
+}
+
+#result {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5vw;
+}

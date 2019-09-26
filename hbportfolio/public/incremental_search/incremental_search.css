@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+main {
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    /* border: 1px solid green; */
+}
+
+#search {
+    height: 2em;
+    border: 1px solid #ccc;
+    padding: 1px;
+}
+
+p.country, #result div {
+    width: inherit;
+    padding: 5px 0;
+}
+
+p.highlight {
+    background-color: yellow;
+}

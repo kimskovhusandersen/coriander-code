@@ -1,0 +1,90 @@
+[
+    {
+        "title": "canvas",
+        "directory": "canvas"
+    },
+    {
+        "title": "carousel",
+        "directory": "carousel"
+    },
+    {
+        "title": "connect4",
+        "directory": "connect4"
+    },
+    {
+        "title": "dom events1",
+        "directory": "dom_events1"
+    },
+    {
+        "title": "dom events2",
+        "directory": "dom_events2"
+    },
+    {
+        "title": "dom events3",
+        "directory": "dom_events3"
+    },
+    {
+        "title": "dom events4",
+        "directory": "dom_events4"
+    },
+    {
+        "title": "flexbox 2",
+        "directory": "flexbox_2"
+    },
+    {
+        "title": "flexbox 3",
+        "directory": "flexbox_3"
+    },
+    {
+        "title": "flexbox 4",
+        "directory": "flexbox_4"
+    },
+    {
+        "title": "github api",
+        "directory": "github_api"
+    },
+    {
+        "title": "handlebars",
+        "directory": "handlebars"
+    },
+    {
+        "title": "html css lab",
+        "directory": "html_css_lab"
+    },
+    {
+        "title": "html css lab 2",
+        "directory": "html_css_lab_2"
+    },
+    {
+        "title": "incremental search",
+        "directory": "incremental_search"
+    },
+    {
+        "title": "localstorage",
+        "directory": "localstorage"
+    },
+    {
+        "title": "panes",
+        "directory": "panes"
+    },
+    {
+        "title": "spotify search",
+        "directory": "spotify_search"
+    },
+    {
+        "title": "test",
+        "directory": "test"
+    },
+    {
+        "title": "ticker",
+        "directory": "ticker"
+    },
+    {
+        "title": "translate number to German",
+        "directory": "translate_number_to_German"
+    },
+    {
+        "title": "validateJSON",
+        "directory": "validateJSON"
+    }
+]
