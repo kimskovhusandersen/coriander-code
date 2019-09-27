@@ -1,90 +1,91 @@
-[
-    {
+{
+    "canvas": {
+        "description": "This is my description\r\n",
         "title": "canvas",
         "directory": "canvas"
     },
-    {
+    "carousel": {
         "title": "carousel",
         "directory": "carousel"
     },
-    {
+    "connect4": {
         "title": "connect4",
         "directory": "connect4"
     },
-    {
+    "dom_events1": {
         "title": "dom events1",
         "directory": "dom_events1"
     },
-    {
+    "dom_events2": {
         "title": "dom events2",
         "directory": "dom_events2"
     },
-    {
+    "dom_events3": {
         "title": "dom events3",
         "directory": "dom_events3"
     },
-    {
+    "dom_events4": {
         "title": "dom events4",
         "directory": "dom_events4"
     },
-    {
+    "flexbox_2": {
         "title": "flexbox 2",
         "directory": "flexbox_2"
     },
-    {
+    "flexbox_3": {
         "title": "flexbox 3",
         "directory": "flexbox_3"
     },
-    {
+    "flexbox_4": {
         "title": "flexbox 4",
         "directory": "flexbox_4"
     },
-    {
+    "github_api": {
         "title": "github api",
         "directory": "github_api"
     },
-    {
+    "handlebars": {
         "title": "handlebars",
         "directory": "handlebars"
     },
-    {
+    "html_css_lab": {
         "title": "html css lab",
         "directory": "html_css_lab"
     },
-    {
+    "html_css_lab_2": {
         "title": "html css lab 2",
         "directory": "html_css_lab_2"
     },
-    {
+    "incremental_search": {
         "title": "incremental search",
         "directory": "incremental_search"
     },
-    {
+    "localstorage": {
         "title": "localstorage",
         "directory": "localstorage"
     },
-    {
+    "panes": {
         "title": "panes",
         "directory": "panes"
     },
-    {
+    "spotify_search": {
         "title": "spotify search",
         "directory": "spotify_search"
     },
-    {
+    "test": {
         "title": "test",
         "directory": "test"
     },
-    {
+    "ticker": {
         "title": "ticker",
         "directory": "ticker"
     },
-    {
+    "translate_number_to_German": {
         "title": "translate number to German",
         "directory": "translate_number_to_German"
     },
-    {
+    "validateJSON": {
         "title": "validateJSON",
         "directory": "validateJSON"
     }
-]
+}

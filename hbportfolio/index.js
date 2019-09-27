@@ -1,8 +1,7 @@
 const express = require("express");
-// const path = require("path");
 const getProjects = require(`${__dirname}/projects.js`).getProjects;
 const app = express();
-const baseUrl = `${__dirname}/public`;
+const baseUrl = `${__dirname}/projects`;
 const projects = getProjects(baseUrl);
 // ----------------------------------------------
 // Use express' build-in support of handlebars
@@ -17,11 +16,24 @@ app.use(
     })
 );
 
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/projects`));
+app.use(express.static(`${__dirname}/assets`));
 
 app.get("/", (req, res) => {
     res.render("welcome", {
         projects
+    });
+});
+
+app.get("/projects/:projUrl", (req, res) => {
+    const { projUrl } = req.params;
+    const project = projects[projUrl];
+    if (!project) {
+        return res.sendStatus(404);
+    }
+    res.render("project", {
+        projects,
+        project
     });
 });
 

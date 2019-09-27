@@ -2,9 +2,9 @@ const fs = require("fs");
 const pathModule = require("path");
 function getProjects(path) {
     const obj = {};
-    const projectArr = [];
-    let result = writeProjects(path, obj, projectArr);
-    function writeProjects(path, obj, projectArr) {
+    const projectObj = {};
+    let result = writeProjects(path, obj, projectObj);
+    function writeProjects(path, obj, projectObj) {
         try {
             // step1
             const files = fs.readdirSync(
@@ -17,25 +17,48 @@ function getProjects(path) {
             // step 2
             for (let i = 0; i < files.length; i++) {
                 let name = files[i].name;
-                let k = path.indexOf("public/") + 6;
+                let k = path.indexOf("projects/") + "projects".length;
                 let n = path.length;
                 let pathToFolder = path.substring(k, n);
                 let pathToFile = `${pathToFolder}/${name}`;
-
+                let title, directory, description;
+                let arr = pathToFolder.split("/");
+                let [isEmpty, baseFolderName, ...theRest] = arr;
                 if (files[i].isFile()) {
                     if (pathModule.extname(pathToFile) == ".html") {
-                        let arr = pathToFolder.split("/");
-                        let [isEmpty, baseFolderName, ...theRest] = arr;
-                        let title = `${baseFolderName}`.split("_").join(" ");
-                        projectArr.push({
-                            title,
-                            directory: `${baseFolderName}`
-                        });
+                        title = `${baseFolderName}`.split("_").join(" ");
+                        directory = baseFolderName;
+                        if (projectObj[`${baseFolderName}`]) {
+                            projectObj[`${baseFolderName}`].title = title;
+                            projectObj[
+                                `${baseFolderName}`
+                            ].directory = directory;
+                        } else {
+                            projectObj[`${baseFolderName}`] = {
+                                title,
+                                directory
+                            };
+                        }
+                    }
+                    if (pathModule.extname(pathToFile) == ".md") {
+                        description = fs.readFileSync(
+                            `${__dirname}/projects/${pathToFile}`,
+                            "utf8"
+                        );
+                        if (projectObj[`${baseFolderName}`]) {
+                            projectObj[
+                                `${baseFolderName}`
+                            ].description = description;
+                        } else {
+                            projectObj[`${baseFolderName}`] = {
+                                description
+                            };
+                        }
                     }
                 } else if (files[i].isDirectory()) {
                     obj[`${name}`] = {};
                     let newPath = `${path}/${name}`;
-                    writeProjects(newPath, obj[`${name}`], projectArr);
+                    writeProjects(newPath, obj[`${name}`], projectObj);
                 }
             }
         } catch (err) {
@@ -43,9 +66,9 @@ function getProjects(path) {
         }
         fs.writeFileSync(
             `${__dirname}/projects.json`,
-            JSON.stringify(projectArr, null, 4)
+            JSON.stringify(projectObj, null, 4)
         );
-        return projectArr;
+        return projectObj;
     }
     return result;
 }
