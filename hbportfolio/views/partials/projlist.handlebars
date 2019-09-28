@@ -1,7 +1,8 @@
-<div id="sidebar">
-    {{#each projects}}
-    <div class="item">
+<ul id="nav-list">
+{{#each projects}}
+    <li class="item">
+        <img src="/{{directory}}/screenshot.png" alt="">
         <a href="/projects/{{directory}}" tag="{{directory}}">{{title}}</a>
-    </div>
-    {{/each}}
-</div>
+    </li>
+{{/each}}
+</ul>

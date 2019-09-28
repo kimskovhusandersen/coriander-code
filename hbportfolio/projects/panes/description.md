@@ -1,0 +1,1 @@
+Layout panes use properties such as padding, spacing, and alignment to manage elements of how the panes appear. Using CSS techniques and JavaScript event listeners, this project showcases how to split panes and create a visual effect of time and space.

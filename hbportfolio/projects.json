@@ -1,91 +1,107 @@
 {
     "canvas": {
-        "description": "This is my description\r\n",
+        "description": "The <canvas> project showcases how an HTML element can be used to draw graphics via JavaScript. It can, for instance, be used to draw graphs, combine photos, or create simple and more complex animations. The images on this page show an example of a <canvas> implementation.\n",
         "title": "canvas",
         "directory": "canvas"
     },
     "carousel": {
+        "description": "The definition of a carousel is a device that rotates and carries objects in a circle. The carousel project showcases a slideshow for cycling through a series of content built with CSS and a bit of JavaScript.\r\n",
         "title": "carousel",
         "directory": "carousel"
     },
-    "connect4": {
-        "title": "connect4",
-        "directory": "connect4"
+    "connect_four": {
+        "description": "Connect Four is a tic-tac-toe like game in which two players drop discs into a 7x6 board. The first player to get four in a row (either vertically, horizontally, or diagonally) wins.\r\n",
+        "title": "connect four",
+        "directory": "connect_four"
     },
-    "dom_events1": {
-        "title": "dom events1",
-        "directory": "dom_events1"
+    "dom_events_I": {
+        "description": "This project is a simple showcase of mousemove JavaScript Event Listener. With the help from setTimeout the HTML element follows the cursor around with 100 ms delay.\r\n",
+        "title": "dom events I",
+        "directory": "dom_events_I"
     },
-    "dom_events2": {
-        "title": "dom events2",
-        "directory": "dom_events2"
+    "dom_events_II": {
+        "description": "This project is a simple showcase of the JavaScript input event listener. Using substr() and length, it replaces each letter that the user is typing with a letter from a pre-defined text.\r\n",
+        "title": "dom events II",
+        "directory": "dom_events_II"
     },
-    "dom_events3": {
-        "title": "dom events3",
-        "directory": "dom_events3"
+    "dom_events_III": {
+        "description": "Using JavaScript event listeners and the build-in JavaScript object \"Math\", this project showcases how to generate random and replacing existing colors followed by a click or another event.\r\n",
+        "title": "dom events III",
+        "directory": "dom_events_III"
     },
-    "dom_events4": {
-        "title": "dom events4",
-        "directory": "dom_events4"
+    "dom_events_IV": {
+        "description": "Similarly to the Dom Event III Project, this project is using JavaScript event listeners and the build-in JavaScript object \"Math\" to generate random colors and replacing existing colors, when a user click the elements. With extra help from the Event method stopPropagation(), the project showcases how it's possible to target specific HTML elements nested inside other HTML elements.\r\n",
+        "title": "dom events IV",
+        "directory": "dom_events_IV"
     },
-    "flexbox_2": {
-        "title": "flexbox 2",
-        "directory": "flexbox_2"
+    "flexbox_II": {
+        "description": "What used to be a struggle, has become peace of cake. Using flexbox to position the core HTML elements on the page, this project shows how easy it has become to position the footer at the bottom, when the page has no content.\r\n",
+        "title": "flexbox II",
+        "directory": "flexbox_II"
     },
-    "flexbox_3": {
-        "title": "flexbox 3",
-        "directory": "flexbox_3"
+    "flexbox_III": {
+        "description": "This mini-project shows that the hard times are over.. Even positioning of an element vertically in the middle and horizontally centered can easily be achieved with flexbox.\r\n",
+        "title": "flexbox III",
+        "directory": "flexbox_III"
     },
-    "flexbox_4": {
-        "title": "flexbox 4",
-        "directory": "flexbox_4"
+    "flexbox_IV": {
+        "description": "There are many ways to achieve the same result. But with Flexbox, the result can be achieve with less effort and less code. Flexbox is a great tool to position nested elements.\r\n",
+        "title": "flexbox IV",
+        "directory": "flexbox_IV"
     },
     "github_api": {
+        "description": "Using jQuery's ajax() method, JS Vanilla event listeners and localStorage, this mini-project showcases how to request and make use of Github resources via the official Github REST API v3.\r\n",
         "title": "github api",
         "directory": "github_api"
     },
     "handlebars": {
+        "description": "This mini-project showcases how using template systems, in this case Handlebars, helps parsing data directly from an object to the front-end smoothly.\r\nWith Handlebars, you can separate the generation of HTML from the rest of your JavaScript and write cleaner code.\r\n",
         "title": "handlebars",
         "directory": "handlebars"
     },
     "html_css_lab": {
+        "description": "This project showcases a simple HTML and CSS website with a cool sliding hamburger menu (side navigation) made with the help from JavaScript.\r\n",
         "title": "html css lab",
         "directory": "html_css_lab"
     },
-    "html_css_lab_2": {
-        "title": "html css lab 2",
-        "directory": "html_css_lab_2"
+    "html_css_lab_II": {
+        "description": "This project showscases CSS transitions. It's a module of CSS that enables gradual transitions between the values of specific CSS properties.\r\nThe behavior of these transitions can be controlled by specifying their timing function, duration, and other attributes.\r\n",
+        "title": "html css lab II",
+        "directory": "html_css_lab_II"
     },
     "incremental_search": {
+        "description": "Using an API middleman, jQuery's ajax method, and JS Vanilla's event listeners, this project showcases how to write a simple search bar code.\r\nWhen the user starts typing, the program sends a request to the middle man, and awaits a response, which in case of success will be returned and\r\nprinted on the screen for the user.\r\n",
         "title": "incremental search",
         "directory": "incremental_search"
     },
     "localstorage": {
+        "description": "This project showcases how to utilize Localstorage, which allows Javascript websites and apps to store and access data right in the browser with no expiration date.\r\nThe advantage of storing data the Localstorage is that the will persist even after the browser window has been closed.\r\n",
         "title": "localstorage",
         "directory": "localstorage"
     },
     "panes": {
+        "description": "Layout panes use properties such as padding, spacing, and alignment to manage elements of how the panes appear. Using CSS techniques and JavaScript event listeners, this project showcases how to split panes and create a visual effect of time and space.\r\n",
         "title": "panes",
         "directory": "panes"
     },
     "spotify_search": {
+        "description": "This mini-projects involves usages of Spotify's API, handlesbars, jQuery and JS Vanilla. The user are allowed to search for album or artist and gets a list of the results from Spotify in return.\r\n",
         "title": "spotify search",
         "directory": "spotify_search"
     },
-    "test": {
-        "title": "test",
-        "directory": "test"
-    },
     "ticker": {
+        "description": "This project showcases a ticker, which is a piece of code that allows items to scroll indefinitely across the screen. It uses some fancy calculations to ensure smooth continuous transitions. The Web Ticker content, can be varied, including text, image lists or even custom styled items.\r\n",
         "title": "ticker",
         "directory": "ticker"
     },
-    "translate_number_to_German": {
-        "title": "translate number to German",
-        "directory": "translate_number_to_German"
+    "translate_number": {
+        "description": "This function looks up a number based on the user's input and logs the number in words in German in the console.\r\n",
+        "title": "translate number",
+        "directory": "translate_number"
     },
-    "validateJSON": {
-        "title": "validateJSON",
-        "directory": "validateJSON"
+    "validate_JSON": {
+        "description": "This little function checks whether the code entered by the user is valid JSON.\r\n",
+        "title": "validate JSON",
+        "directory": "validate_JSON"
     }
 }

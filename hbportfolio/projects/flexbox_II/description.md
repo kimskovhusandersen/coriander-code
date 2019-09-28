@@ -1,0 +1,1 @@
+What used to be a struggle, has become peace of cake. Using flexbox to position the core HTML elements on the page, this project shows how easy it has become to position the footer at the bottom, when the page has no content.

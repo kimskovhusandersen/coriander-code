@@ -1,0 +1,205 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    margin: 0;
+    height: 100vh;
+    min-height: 100vh;
+    line-height: 1.15;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+#burger-menu-btn:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    margin: auto;
+    background-color: #fff;
+    height: 50px;
+    width: 50px;
+    z-index: 2;
+}
+
+#burger-menu-btn {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    height: 70px;
+    width: 70px;
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    padding: 0;
+    background: transparent;
+    vertical-align: bottom;
+    cursor: pointer;
+    z-index: 5;
+    /* vertical-align: bottom; */
+}
+
+#burger-menu-btn:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    margin: auto;
+    background-color: rgba(0, 0, 0, .07);
+    height: 70px;
+    width: 70px;
+    z-index: 1;
+    transition: all .2s ease-in-out;
+}
+
+#burger-menu-btn span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: #000;
+    display: block;
+    width: 20px;
+    height: 1px;
+    top: 0;
+    z-index: 3;
+}
+
+#burger-menu-btn span:nth-child(1) {
+    top: -12px;
+}
+
+#burger-menu-btn span:nth-child(2) {
+    visibility: visible;
+}
+
+#burger-menu-btn span:nth-child(3) {
+    top: 12px;
+}
+
+#burger-menu-btn.on span:nth-child(1) {
+    top: 0px;
+    transform: rotate(-45deg);
+}
+
+#burger-menu-btn.on span:nth-child(2) {
+    visibility: hidden;
+}
+
+#burger-menu-btn.on span:nth-child(3) {
+    top: 0px;
+    transform: rotate(45deg);
+}
+
+header {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 70px;
+    height: 70px;
+    border: 3px solid #FFA600;
+    flex: none;
+}
+
+header .logo {
+    position: relative;
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    z-index: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.logo svg {
+    height: 100%;
+    max-height: 40px;
+    width: 100%;
+}
+
+.sticky-border {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 30px;
+    background-color: #fff;
+    z-index: 10;
+}
+
+main {
+    /* overflow-y: scroll; */
+    /* -webkit-overflow-scrolling: touch; */
+    flex: auto;
+    border: 3px solid #929292;
+}
+
+.page-border {
+    padding: 30px;
+}
+
+aside#nav {
+    position: fixed;
+    height: 100%;
+    width: 50%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    height: calc(100% - 30px);
+    border: 3px solid red;
+    z-index: 4;
+    transition: all .2s ease-in-out;
+}
+
+aside#nav.on {
+    transform: translateX(0%);
+}
+
+aside ul#nav-list {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin-top: 30px;
+    padding: 30px 20% 40px 40px;
+    /* margin-top: 25px; */
+    /* padding: 15px 5% 30px 15px; */
+    overflow-y: auto;
+}
+
+aside li {
+    display: block;
+    margin-bottom: 30px;
+}
+
+aside ul a {
+    display: block;
+    transition: all .2s ease-in-out;
+    text-decoration: none;
+}
+
+img {
+    display: none;
+    visibility: hidden;
+}
+
+footer {
+    flex: none;
+    height: 30px;
+    border: 3px solid #FFBFCB;
+}

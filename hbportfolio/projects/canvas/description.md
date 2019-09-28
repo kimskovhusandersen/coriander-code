@@ -1,1 +1,1 @@
-This is my description
+The <canvas> project showcases how an HTML element can be used to draw graphics via JavaScript. It can, for instance, be used to draw graphs, combine photos, or create simple and more complex animations. The images on this page show an example of a <canvas> implementation.

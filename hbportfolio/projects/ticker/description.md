@@ -1,0 +1,1 @@
+This project showcases a ticker, which is a piece of code that allows items to scroll indefinitely across the screen. It uses some fancy calculations to ensure smooth continuous transitions. The Web Ticker content, can be varied, including text, image lists or even custom styled items.
