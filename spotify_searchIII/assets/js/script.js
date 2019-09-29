@@ -18,6 +18,15 @@
     var baseUrl = "https://elegant-croissant.glitch.me/spotify";
     var nextUrl, html, height, scrollHeight, scrollTop;
 
+    // moreBtn.style.visibility = "hidden";
+
+    userInput.addEventListener('keyup', e => {
+        if (e.code == "Enter") {
+            submitBtn.click();
+        }
+    });
+
+
     try {
         var jsonInput = localStorage.getItem("input");
         userInput.value = JSON.parse(jsonInput);
@@ -55,9 +64,9 @@
                 payload = payload.artists || payload.albums;
                 // Add a headline for the search result
                 payload.headline =
-                    payload.items.length === 0
-                        ? "No result"
-                        : `Results for "${inputValue}"`;
+                    payload.items.length === 0 ?
+                    "No result" :
+                    `Results for "${inputValue}"`;
                 // Check if there's a next url
                 if (payload.next === null) {
                     moreBtn.style.visibility = "hidden";

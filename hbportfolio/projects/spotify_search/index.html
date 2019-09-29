@@ -2,58 +2,76 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="styles.css">
-    <title>Spotify Search</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title>Spotify Search</title>
 </head>
 
 <body>
-    <div id="wrapper">
 
-        <h1>Spotify Search Project</h1>
-        <input id="user-input" type="text" name="user-input" value="">
-        <select class="artist-or-album" name="artist-or-album">
-            <option id="artist" value="artist">artist</option>
-            <option id="album" value="album">album</option>
-        </select>
-        <button id="submit-button" type="submit" name="submit-button">Submit</button>
+  <div id="top-history">
+    <div id="list-page">
+      <div id="page-image">
+      </div>
+      <h1>Spotify Search Project</h1>
+      <div id="page-content">
+        <div id="list-page">
+          <div id="page-inner">
+            <ul id="search-container">
+              <li>
+                <input id="user-input" type="text" name="user-input" value="" placeholder="Search for album or artist..">
 
-        <div id="results-container">
+              </li>
+              <li>
+
+                <select class="artist-or-album" name="artist-or-album">
+                  <option id="artist" value="artist">artist</option>
+                  <option id="album" value="album">album</option>
+                </select>
+              </li>
+              <li>
+                <button id="submit-button" type="submit" name="submit-button">Submit</button>
+              </li>
+            </ul>
+
+            <div id="results-container">
+            </div>
+            <button id="more-button" type="submit" name="more-button">More</button>
+          </div>
         </div>
-        <button id="more-button" type="submit" name="more-button">More</button>
+      </div>
     </div>
+  </div>
 
-    <script id="spotifyItems" type="text/x-handlebars-template">
-        {{#if headline}}
-            <div id="headline">{{headline}}</div>
+  <script id="spotifyItems" type="text/x-handlebars-template">
+    {{#if headline}}
+      <div id="headline">{{headline}}</div>
+    {{/if}}
+    {{#each items}}
+      {{#if this.name}}
+        {{#if this.external_urls.spotify}}
+          <a class="item" href="{{this.external_urls.spotify}}">
+        {{else}}
+          <a class="item" href="https://spotify.com/404">
         {{/if}}
-        {{#each items}}
-            {{#if this.name}}
-                {{#if this.external_urls.spotify}}
-                    <a href="{{this.external_urls.spotify}}">
-                {{else}}
-                    <a href="https://spotify.com/404">
-                {{/if}}
-                <div class="item">
-                    <div class="image-container">
-                        {{#if this.images.[0].url }}
-                            <img src="{{this.images.[0].url}}" alt="{{this.name}}" />
-                        {{else}}
-                            <img src="./assets/spotify-logo.png" alt="{{this.name}}" />
-                        {{/if}}
-                    </div>
-                    <div class="name">
-                        <p>{{this.name}}</p>
-                    </div>
-                </div>
-                </a>
-            {{/if}}
-        {{/each}}
-    </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="script.js"></script>
+        {{#if this.images.[0].url }}
+          <img src="{{this.images.[0].url}}" alt="{{this.name}}" />
+        {{else}}
+          <img src="./assets/images/spotify-logo.png" alt="{{this.name}}" />
+        {{/if}}
+        <div class="title">
+          <h3>{{this.name}}</h3>
+        </div>
+
+        </a>
+      {{/if}}
+    {{/each}}
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 
 </html>

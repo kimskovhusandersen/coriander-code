@@ -1,0 +1,1 @@
+This mini-projects involves the exploitation of Spotify's API, handlesbars, jQuery and JS Vanilla. The user are allowed to search for album or artist and gets a list of the results from Spotify in return.

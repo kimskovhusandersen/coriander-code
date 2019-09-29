@@ -1,0 +1,233 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  font-weight: bold;
+}
+
+#page-image {
+  background-image: url("../images/spotify.jpg");
+  height: 55vh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  object-fit: cover;
+  transform-origin: 50% 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+#top-history {
+  width: 95vw;
+  padding: 0 0 1em;
+  margin: 0 auto;
+}
+
+#list-page {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 auto 1.5em;
+  padding: calc(55vh - 100px) 1.5em 2em;
+  background: #fff;
+}
+
+#page-inner {
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  color: #fff;
+  padding-bottom: 0;
+  top: -.75em;
+  z-index: 2;
+  font-size: 2.6em;
+  display: inline;
+  white-space: nowrap;
+}
+
+#page-content:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 101%;
+  top: -25px;
+  height: 45px;
+  left: 0;
+  right: 0;
+  height: 10vw;
+  background: #fff;
+  z-index: 3;
+  outline: 1px solid transparent;
+  transform: translateZ(0) skewY(-1.5deg);
+  overflow-x: hidden;
+  /* border: 1px limegreen solid; */
+}
+
+#page-content {
+  position: relative;
+  z-index: 3;
+  background: #fff;
+  min-height: 100px;
+  margin: 0 -1.5em;
+  padding: 35px 2em;
+  /* border: 1px solid red; */
+}
+
+#list-page {
+  position: relative;
+  z-index: 4;
+  /* border: 1px dotted black; */
+}
+
+h2 {
+  /* color: #333;
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding: 0 0 5px 3px; */
+}
+
+a {
+  /* text-decoration: none;
+  color: #23CF5F; */
+}
+
+ul#search-container {
+  display: grid;
+  grid-template-columns: 70% 30% 0%;
+  grid-template-rows: auto;
+  grid-template-areas: "input select submit";
+  padding: 0;
+  list-style-type: none;
+  border-bottom: 1px solid orange;
+}
+
+ul#search-container li:nth-child(1) {
+  grid-area: input;
+}
+
+input, input::placeholder {
+  padding: 4px 2px;
+  border: none;
+  width: 100%;
+  font-size: 1.2em;
+  outline: 0;
+  color: orange;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+button#submit-button {
+  visibility: hidden;
+}
+
+ul#search-container li:nth-child(2) {
+  grid-area: select;
+}
+
+select {
+  color: orange;
+  /* padding: 4px 2px; */
+  border: none;
+  outline: 0;
+  font-size: 1.1em;
+  position: absolute;
+  right: 20px;
+}
+
+option {
+  padding: 4px 2px;
+  font-size: 0.8em;
+}
+
+ul#search-container li:fnth-child(3) {
+  grid-area: submit;
+  visibility: hidden;
+}
+
+#results-container #headline {
+  width: 100%;
+  background: orange;
+  color: #fff;
+  margin: 10px 0;
+  padding: 8px 0 8px 4px;
+  font-size: 0.9em;
+}
+
+#results-container a:hover {
+  background: rgba(255, 165, 0, 0.2)
+}
+
+#results-container a {
+  text-decoration: none;
+  height: 100px;
+  display: block;
+  /* overflow: hidden; */
+  margin: 2px 0;
+  /* padding: 10px 10px 10px 0; */
+}
+
+#results-container a.item img {
+  height: 100%;
+  width: 100px;
+  object-fit: cover;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  float: left;
+}
+
+#results-container a.item .title {
+  width: calc(100% - 100px);
+  color: orange;
+  padding: 14px 6px 7px;
+  float: left;
+  height: 100%;
+}
+
+button#more-button {
+  border: none;
+  visibility: hidden;
+  cursor: pointer;
+  width: 100%;
+  background: orange;
+  color: #fff;
+  margin: 10px 0;
+  padding: 8px 0 8px 4px;
+  font-size: 0.9em;
+}
+
+/* rubik-regular - latin */
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/rubik-v9-latin-regular.eot');
+  /* IE9 Compat Modes */
+  src: local('Rubik'), local('Rubik-Regular'),
+    url('../fonts/rubik-v9-latin-regular.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */
+    url('../fonts/rubik-v9-latin-regular.woff2') format('woff2'),
+    /* Super Modern Browsers */
+    url('../fonts/rubik-v9-latin-regular.woff') format('woff'),
+    /* Modern Browsers */
+    url('../fonts/rubik-v9-latin-regular.ttf') format('truetype'),
+    /* Safari, Android, iOS */
+    url('../fonts/rubik-v9-latin-regular.svg#Rubik') format('svg');
+  /* Legacy iOS */
+}

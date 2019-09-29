@@ -8,27 +8,26 @@
 </head>
 <!-- hi -->
 <body>
+      <aside id="nav">
+          {{>projlist}}
+      </aside>
+      <button type="button" id="burger-menu-btn">
+          <span>&nbsp;</span>
+          <span>&nbsp;</span>
+          <span>&nbsp;</span>
+      </button>
+      <header>
+          <a class="logo" href="/"><span>Portfolio</span></a>
+          <span class="sticky-border"></span>
+      </header>
+      <main class="page-border">
+          {{{body}}}
+      </main>
+      <footer>
+          <p>&copy; Kim Skovhus Andersen</p>
+      </footer>
 
-        <aside id="nav">
-            {{>projlist}}
-        </aside>
-        <button type="button" id="burger-menu-btn">
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-        </button>
-        <header>
-            <a class="logo" href="/"><span>Portfolio</span></a>
-            <span class="sticky-border"></span>
-        </header>
-        <main class="page-border">
-            {{{body}}}
-        </main>
-        <footer>
-            INSIDE THE FOOTER
-        </footer>
-    
-        <script src="/js/script.js" charset="utf-8"></script>
+      <script src="/js/script.js" charset="utf-8"></script>
 </body>
 
 </html>
