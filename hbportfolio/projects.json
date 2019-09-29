@@ -85,7 +85,7 @@
         "directory": "panes"
     },
     "spotify_search": {
-        "description": "This mini-projects involves usages of Spotify's API, handlesbars, jQuery and JS Vanilla. The user are allowed to search for album or artist and gets a list of the results from Spotify in return.\r\n",
+        "description": "This mini-projects involves the exploitation of Spotify's API, handlesbars, jQuery and JS Vanilla. The user are allowed to search for album or artist and gets a list of the results from Spotify in return.\r\n",
         "title": "spotify search",
         "directory": "spotify_search"
     },
