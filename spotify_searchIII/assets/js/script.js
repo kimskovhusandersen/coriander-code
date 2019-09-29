@@ -10,6 +10,7 @@
         Handlebars.templates[script.id] = Handlebars.compile(script.innerHTML);
     });
     /////////////////////// DO NOT TOUCH /////////////////////////////////
+
     var userInput = document.getElementById("user-input");
     var submitBtn = document.getElementById("submit-button");
     var moreBtn = document.getElementById("more-button");
@@ -19,6 +20,8 @@
     var nextUrl, html, height, scrollHeight, scrollTop;
 
     // moreBtn.style.visibility = "hidden";
+
+
 
     userInput.addEventListener('keyup', e => {
         if (e.code == "Enter") {

@@ -1,0 +1,243 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: laca, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.1em;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#wrapper {
+  flex: auto;
+  padding: 30px 30px 0 30px;
+}
+
+main {
+  /* flex: auto; */
+}
+
+header {
+  position: relative;
+  height: 70px;
+  flex: none;
+}
+
+header img {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  height: 100%;
+}
+
+header span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-style: italic;
+  letter-spacing: 0.1em;
+}
+
+.bg-color {
+  background: #d9eeec;
+}
+
+p, span, i, li, button, input, input::placeholder {
+  color: #64b2cd;
+}
+
+input:focus {
+  background: transparent !important;
+}
+
+h1, h2, h3, h4, h5, b {
+  color: #da9833;
+}
+
+footer {
+  background: #3c70a4;
+}
+
+ul#input-fields {
+  display: grid;
+  grid-template-columns: 50% 15% 15 20%;
+  grid-template-rows: auto;
+  grid-template-areas: "input username password submit";
+  padding: 0;
+  list-style-type: none;
+  border-bottom: 1px solid #3c70a4;
+  margin-bottom: 30px;
+}
+
+ul#input-fields li>* {
+  font-weight: 500;
+  padding: 4px 2px;
+  font-size: 1em;
+}
+
+input:focus {
+  background: #d9eeec !important;
+}
+
+ul#input-fields li:nth-child(1) {
+  grid-area: input;
+  border-right: 1px dotted #3c70a4;
+}
+
+ul#input-fields li:nth-child(2) {
+  grid-area: username;
+  border-right: 1px dotted #3c70a4;
+}
+
+ul#input-fields li:nth-child(3) {
+  grid-area: password;
+  border-right: 1px dotted #3c70a4;
+}
+
+ul#input-fields li:nth-child(4) {
+  grid-area: submit;
+}
+
+button[name="button"] {
+  background: #d9eeec;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #eee;
+  border-bottom: none;
+  color: #64b2cd;
+  cursor: pointer;
+}
+
+button[name="button"]:hover {
+  border: 1px solid #3c70a4;
+  background: #3c70a4;
+  border-bottom: none;
+}
+
+input, input::placeholder {
+  padding: 4px 2px;
+  border: none;
+  width: 100%;
+  outline: 0;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.expanded {
+  transform: rotate(180deg);
+}
+
+#github-info {
+  position: relative;
+}
+
+ul#repos {
+  display: block;
+  list-style: none;
+  padding: 0;
+}
+
+ul#repos .image-wrapper {
+  position: absolute;
+  padding: 0;
+  top: 0px;
+  right: 0px;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+ul#repos img {
+  width: 150px;
+  border-radius: 8px;
+  border: 1px solid #3c70a4;
+  border-radius: 4px;
+  padding: 5px;
+  background: white;
+  transform: translateZ(1px) rotate(10deg);
+}
+
+ul#repos li.repo {
+  display: block;
+  padding: 30px 0;
+  border-bottom: 1px solid black;
+  width: 75vw;
+}
+
+.repo-title-wrapper {
+  display: grid;
+  grid-template-columns: 50px calc(100% - 50px);
+  grid-template-rows: auto;
+  align-items: center;
+}
+
+.repo-title-wrapper h2 {
+  display: inline-block;
+  margin-left: 30px;
+  font-size: 2rem;
+  color: black;
+}
+
+.repo-title-wrapper h2:hover {
+  color: #da9833;
+}
+
+.repo-title {
+  cursor: pointer;
+}
+
+li.repo h3 {
+  margin: 25px 0 5px;
+  font-size: 1.3rem;
+}
+
+.repo ul.commits {
+  display: none;
+  visibility: hidden;
+  transition: ease-out 1s;
+}
+
+.repo.on ul.commits {
+  visibility: visible !important;
+  display: block !important;
+  transition: ease-out 1s;
+}
+
+ul.commits li.commit-title {
+  font-family: "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+  color: black;
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 300;
+  padding: 11px 0 2px;
+  border-bottom: 1px solid #d9eeec;
+}
+
+footer {
+  flex: none;
+  position: relative;
+  height: 10vh;
+}
+
+footer span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

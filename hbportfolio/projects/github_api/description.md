@@ -1,1 +1,2 @@
 Using jQuery's ajax() method, JS Vanilla event listeners and localStorage, this mini-project showcases how to request and make use of Github resources via the official Github REST API v3.
+LocalStorage is used to store the response object, so that in case the user clicks the same repository several times, a the data from localStorage will be used instead of sending a new requeste to the Github API.  

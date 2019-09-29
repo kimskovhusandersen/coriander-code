@@ -2,62 +2,69 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <title>Github API</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://use.typekit.net/tdp6doj.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <title></title>
 </head>
 
 <body>
-    <div class="wrapper">
-        <header class="header">
-            <div class="logo">
-                <img src="assets/github-header.png" alt="github">
-            </div>
-            <div class="search">
-                <div class="inputs">
-                    <input type="text" name="username" value="" placeholder="Your username" autocomplete="off">
-                    <input type="password" name="password" value="" placeholder="Your password">
-                    <input type="text" name="user-to-find" value="" placeholder="Find people on github" autocomplete="off">
-                </div>
-                <button id="submit" type="button" name="button">Search</button>
-            </div>
-        </header>
-        <!-- Container for template -->
-        <main>
-            <div id="github-info"></div>
-        </main>
-    </div>
-    </div>
+  <div id="wrapper">
 
-    <!-- Template -->
-    <script id="gits" type="text/x-handlebars-template">
+
+    <header class="header">
+      <span>Github API Project</span>
+      <img src="./assets/images/github-header.png" alt="github">
+
+    </header>
+    <main>
+      <ul id="input-fields">
+        <li><input type="text" name="user-to-find" value="" placeholder="Search people on github.." autocomplete="off"></li>
+        <li><input type="text" name="username" value="" placeholder="Your username" autocomplete="off"></li>
+        <li><input type="password" name="password" value="" placeholder="Your password"></li>
+        <li><button id="submit" type="button" name="button">Search</button></li>
+      </ul>
+      <div id="github-info"></div>
+    </main>
+  </div>
+  <footer>
+    <span>&copy; Kim Skovhus Andersen</span>
+  </footer>
+  <script id="gits" type="text/x-handlebars-template">
+    <ul id="repos">
         {{#each repos}}
-            <div class="item">
-                <div class="image-container {{full_name}}">
-                    <input type="hidden" name="full_name" value="{{full_name}}">
-                    <img src="{{owner.avatar_url}}" alt="avatar">
-                    <div class="repo-name">
-                        <p>{{full_name}}</p>
-                    </div>
-                </div>
-                <div class="commits-container {{full_name}}">
-                    {{#if this.commits}}
-                        <div class="commits">
-                            <h3>Most Recent Commits</h3>
-                            {{#each this.commits}}
-                                <p class="commit">{{this.commit.message}}</p>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                </div>
-            </div>
-        {{/each}}
-    </script>
+          {{#if @first}}
+          <h1>{{this.owner.login}}'s repositories</h1>
+          <div class="image-wrapper">
+            <img src="{{owner.avatar_url}}" alt="avatar">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+          </div>
+          {{/if}}
+            <li class="repo on">
+              <div class="repo-title-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon repo-title" width="19.4142132" height="11.1213207" viewBox="0 0 19.4142132 11.1213207">
+                  <path fill="#da9833" d="M9.707 11.121l-9.707-9.707 1.414-1.414 8.293 8.293 8.293-8.293 1.414 1.414z"></path>
+                </svg>
+                <h2 class="repo-title">{{full_name}}</h2>
+              </div>
+              {{#if this.commits}}
+                <ul class="commits">
+                  <h3>Recent Commits</h3>
+                  {{#each this.commits}}
+                    <li class="commit-title">
+                      {{this.commit.message}}
+                    </li>
+                  {{/each}}
+                </ul>
+              {{/if}}
+            </li>
+
+        {{/each}}
+      </ul>
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./assets/js/script.js"></script>
 </body>
 
 </html>

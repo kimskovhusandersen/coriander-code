@@ -11,14 +11,15 @@
     });
     /////////////////////// DO NOT TOUCH /////////////////////////////////
 
+    var submit = document.getElementById("submit");
+
     var githubInfo = document.getElementById("github-info");
     var username = document.querySelector("input[name=username]");
     var password = document.querySelector("input[name=password]");
     var userToFind = document.querySelector("input[name=user-to-find]");
-    var submit = document.getElementById("submit");
     var jsonUsername, jsonUserToFind;
     var baseUrl = "https://api.github.com";
-    var endpoint, encryptedLogin, payload, fullName, target, item;
+    var endpoint, encryptedLogin, responseObj, jsonResponseObj, parsedResponseObj, fullName, target, responseObjUpToDate;
 
     getLocalStorage();
 
@@ -27,7 +28,7 @@
     // show max 10 commit messages
 
     submit.addEventListener("click", function() {
-        setLocalStorage(username, userToFind);
+        setLocalStorage(username, userToFind, responseObj);
         endpoint = `/users/${userToFind.value}/repos`;
         encryptedLogin = btoa(username.value + ":" + password.value);
 
@@ -37,10 +38,11 @@
             headers: {
                 Authorization: `Basic ${encryptedLogin}`
             },
-            success: function(response) {
-                payload = response;
+            success: function(repos) {
+                responseObj = repos;
+                setLocalStorage(username, userToFind, responseObj);
                 githubInfo.innerHTML = Handlebars.templates.gits({
-                    repos: payload
+                    repos
                 });
             },
             error: function() {
@@ -50,14 +52,38 @@
     });
 
     document.addEventListener("click", function(e) {
-        target = e.target;
-        item = e.path[1];
-        if (!target.classList.contains("image-container")) {
-            return;
-        }
-        fullName = target.childNodes[1].value;
-        endpoint = `/repos/${fullName}/commits `;
+        // reset status upon new request
+        responseObjUpToDate = false;
 
+        getLocalStorage();
+        let parent = e.target.parentElement.parentElement;
+
+
+        fullName = e.target.classList.contains("icon") ?
+            e.target.parentElement.childNodes[3].innerHTML : e.target.innerHTML;
+
+        // Check if localStorage is up to date
+        for (let props in parsedResponseObj) {
+            if (parsedResponseObj[props].full_name == fullName && parsedResponseObj[props].hasOwnProperty('commits')) {
+                responseObjUpToDate = true;
+            } else if (parsedResponseObj[props].full_name != fullName && parsedResponseObj[props].hasOwnProperty('commits')) {
+                delete parsedResponseObj[props].commits;
+                responseObj = parsedResponseObj;
+            }
+        }
+
+        if (responseObjUpToDate) {
+            if (parent.classList.contains("on")) {
+                console.log(parent, "<ul> commits is showing - removing on");
+                parent.classList.remove("on");
+            } else {
+                console.log(parent, "<ul> commits is hidden - adding on!");
+                parent.classList.add("on");
+            }
+            return; // no need make new request for commits
+        }
+
+        endpoint = `/repos/${fullName}/commits `;
         $.ajax({
             url: `${baseUrl}${endpoint}`,
             method: "GET",
@@ -65,46 +91,37 @@
                 Authorization: `Basic ${encryptedLogin}`
             },
             success: function(response) {
-                for (var property in payload) {
-                    if (payload[property].full_name == fullName) {
-                        payload[property]["commits"] = response;
+
+                console.log(parent.classList);
+                for (var property in responseObj) {
+                    if (responseObj[property].full_name == fullName) {
+                        responseObj[property]["commits"] = response;
                     }
                 }
 
-                console.log(payload);
+
+                setLocalStorage(username, userToFind, responseObj);
                 githubInfo.innerHTML = Handlebars.templates.gits({
-                    repos: payload
-                });
-
-                fullName = target.classList[1];
-                var containers = document.getElementsByClassName(fullName);
-
-                $(containers[0])
-                    .parent()
-                    .addClass("on");
-                containers[0].classList.add("on");
-                containers[1].classList.add("on");
-                $(containers[1]).on("click.clicked", function() {
-                    $(containers[0])
-                        .parent()
-                        .removeClass("on");
-                    containers[0].classList.remove("on");
-                    containers[1].classList.remove("on");
-                    $(containers[1]).off("click.clicked");
+                    repos: responseObj
                 });
             },
             error: function() {
                 console.log("something went wrong");
+            },
+            complete: function() {
+                parent.classList.add("on");
             }
         });
     });
 
-    function setLocalStorage(username, userToFind) {
+    function setLocalStorage(username, userToFind, responseObj) {
         try {
             jsonUsername = JSON.stringify(username.value);
             localStorage.setItem("jsonUsername", jsonUsername);
             jsonUserToFind = JSON.stringify(userToFind.value);
             localStorage.setItem("jsonUserToFind", jsonUserToFind);
+            jsonResponseObj = JSON.stringify(responseObj);
+            localStorage.setItem("jsonResponseObj", jsonResponseObj);
         } catch (e) {
             console.log(e);
         }
@@ -116,10 +133,19 @@
             username.value = JSON.parse(jsonUsername);
             jsonUserToFind = localStorage.getItem("jsonUserToFind");
             userToFind.value = JSON.parse(jsonUserToFind);
+            jsonResponseObj = localStorage.getItem("jsonResponseObj");
+            // console.log(jsonResponseObj);
+            parsedResponseObj = JSON.parse(jsonResponseObj);
+            // console.log(parsedResponseObj);
         } catch (e) {
             console.log(e);
         }
     }
+
+
+
+
+
 })();
 
 // $(documents).on("click", ".className", function() {

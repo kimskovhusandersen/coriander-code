@@ -50,7 +50,7 @@
         "directory": "flexbox_IV"
     },
     "github_api": {
-        "description": "Using jQuery's ajax() method, JS Vanilla event listeners and localStorage, this mini-project showcases how to request and make use of Github resources via the official Github REST API v3.\r\n",
+        "description": "Using jQuery's ajax() method, JS Vanilla event listeners and localStorage, this mini-project showcases how to request and make use of Github resources via the official Github REST API v3.\r\nLocalStorage is used to store the response object, so that in case the user clicks the same repository several times, a the data from localStorage will be used instead of sending a new requeste to the Github API.  \r\n",
         "title": "github api",
         "directory": "github_api"
     },
@@ -74,10 +74,10 @@
         "title": "incremental search",
         "directory": "incremental_search"
     },
-    "localstorage": {
+    "local_storage": {
         "description": "This project showcases how to utilize Localstorage, which allows Javascript websites and apps to store and access data right in the browser with no expiration date.\r\nThe advantage of storing data the Localstorage is that the will persist even after the browser window has been closed.\r\n",
-        "title": "localstorage",
-        "directory": "localstorage"
+        "title": "local storage",
+        "directory": "local_storage"
     },
     "panes": {
         "description": "Layout panes use properties such as padding, spacing, and alignment to manage elements of how the panes appear. Using CSS techniques and JavaScript event listeners, this project showcases how to split panes and create a visual effect of time and space.\r\n",
