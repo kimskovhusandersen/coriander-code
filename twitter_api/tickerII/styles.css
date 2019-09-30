@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+#ticker {
+    position: relative;
+    overflow: hidden;
+    height: 1.5em;
+    padding: 3px 0;
+    border-bottom: 1px solid #ddd;
+    background-color: #eee;
+}
+
+#headlines {
+    position: absolute;
+    left: 100%;
+    white-space: nowrap;
+    font-size: 0;
+    /* border: 2px solid red; */
+}
+
+#ticket2Wrapper {
+    position: absolute;
+    bottom: 0px;
+    height: 1.5em;
+    width: 100%;
+}
+
+#ticker2 {
+    position: relative;
+    overflow: hidden;
+    height: 1.5em;
+    padding: 3px 0;
+    border-top: 1px solid #ddd;
+    background-color: #eee;
+}
+
+#headlines2 {
+    position: absolute;
+    right: 100%;
+    white-space: nowrap;
+    font-size: 0;
+    /* border: 2px solid red; */
+}
+
+#headlines a {
+    margin-right: 40px;
+}
+
+#headlines2 a {
+    margin-left: 40px;
+}
+
+a {
+    /* border: 1px solid green; */
+    font-size: 16px;
+    font-weight: 600;
+    color: navy;
+    font-family: helvetica;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: black;
+}
+
+a:visited {
+    color: navy;
+}
