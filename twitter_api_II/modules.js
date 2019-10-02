@@ -83,7 +83,7 @@ module.exports.filterTweets = function filterTweets(tweets) {
         for (let props in tweets) {
             let textArr = tweets[props]["full_text"].split("https://");
             let url = `https://${textArr.pop()}`;
-            let text = textArr.join(" ");
+            let text = textArr.join("");
             // let urls = tweets[props]["entities"]["urls"][0];
             // let url = urls ? urls["url"] : tweets[props].user.url;
             let obj = {};

@@ -14,8 +14,8 @@ app.get("/data.json", (req, res) => {
             ]);
         })
         .then(tweets => {
-            const [bbcworld, nytimes] = tweets;
-            const mergedTweets = bbcworld.concat(nytimes);
+            const [weirdnews, newsBeFunny, headlinesLMAO] = tweets;
+            const mergedTweets = weirdnews.concat(newsBeFunny, headlinesLMAO);
             const sortedTweets = mergedTweets.sort((a, b) => {
                 return new Date(b.created_at) - new Date(a.created_at);
             });

@@ -18,15 +18,15 @@ app.get("/", (req, res) => {
     let board, legalMoves, cell;
     board = makeBoard(7, 6);
 
-    let turns = 10;
+    let turns = 1;
     for (let i = 0; i < turns; i++) {
         legalMoves = getLegalMoves(board);
         cell = selectMoveRandomly(board, legalMoves, player);
         let w = [
             checkWinH(board, cellsToConnect, player, cell),
             checkWinV(board, cellsToConnect, player, cell),
-            checkWinDiaL(board, cellsToConnect, player, cell),
-            checkWinDiaR(board, cellsToConnect, player, cell)
+            checkWinDiaL(board, cellsToConnect, player, cell)
+            // checkWinDiaR(board, cellsToConnect, player, cell)
         ];
         console.log(w);
     }

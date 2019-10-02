@@ -111,6 +111,48 @@ module.exports.checkWinV = function checkWinV(board, cTC, player, cell) {
     return cc;
 };
 
+module.exports.checkWinDiaL = function checkWinDiaL(board, cTC, player, cell) {
+    const { col, row } = cell;
+    let i = 1;
+    let cc = 0;
+    let keepAdd = 1;
+    let keepSub = 1;
+
+    let nextCol = board[col + 1];
+    let prevCol = board[col - 1];
+
+    if (nextCol == undefined && prevCol == undefined) {
+        return;
+    }
+
+    // get array!
+
+    // Checking right, up:
+    // function checkRightUp() {
+    //     if (nextCol != undefined && keepAdd) {
+    //         let nextCell = nextCol[row + i];
+    //         if (nextCell != undefined && nextCell.owner == player) {
+    //             cc++;
+    //         } else {
+    //             keepAdd = 0;
+    //         }
+    //     }
+    //     if (prevCol != undefined && keepSub) {
+    //         let prevCell = prevCol[row - i];
+    //         if (prevCell != undefined && prevCell.owner == player) {
+    //             cc++;
+    //         } else {
+    //             keepSub = 0;
+    //         }
+    //     }
+    //     i++;
+    // }
+
+    checkRightUp();
+
+    return cc;
+};
+
 module.exports.checkWinDiaR = function checkWinDiaR(board, cTC, player, cell) {
     const { col, row } = cell;
     let i = 1;
@@ -143,42 +185,6 @@ module.exports.checkWinDiaR = function checkWinDiaR(board, cTC, player, cell) {
         i++;
         checkWinDiaR();
     };
-    checkWinDiaR();
-    return cc;
-};
 
-module.exports.checkWinDiaL = function checkWinDiaL(board, cTC, player, cell) {
-    const { col, row } = cell;
-    let i = 1;
-    let cc = 0;
-    let keepAdd = 1;
-    let keepSub = 1;
-
-    let checkWinDiaL = () => {
-        if (
-            (!board[col + i][row - i] && !board[col - i][row + i]) ||
-            (!keepAdd && !keepSub)
-        ) {
-            return;
-        }
-
-        if (board[col + i][row - i] && keepAdd) {
-            if (board[col + i][row - i].owner == player) {
-                cc++;
-            } else {
-                keepAdd = 0;
-            }
-        }
-        if (board[col - i][row + i] && keepSub) {
-            if (board[col - i][row + i].owner == player) {
-                cc++;
-            } else {
-                keepSub = 0;
-            }
-        }
-        i++;
-        checkWinDiaL();
-    };
-    checkWinDiaL();
     return cc;
 };
