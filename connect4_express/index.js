@@ -1,36 +1,49 @@
 const express = require("express");
 const app = express();
+const { makeBoard, getLegalCells, selectCellRandomly } = require("./modules");
 const {
-    makeBoard,
-    getLegalMoves,
-    selectMoveRandomly,
-    checkWinH,
-    checkWinV,
-    checkWinDiaL,
-    checkWinDiaR
-} = require("./modules");
+    checkVertically,
+    checkHorizontally,
+    checkDiagonallyL,
+    checkDiagonallyR
+} = require("./checkConnections");
 
 // app.use(express.static("connect4"));
 
 app.get("/", (req, res) => {
-    let player = 0;
+    let player = false;
     const cellsToConnect = 4;
-    let board, legalMoves, cell;
+    let board, legalCells, cell;
     board = makeBoard(7, 6);
 
-    let turns = 1;
+    let turns = 10;
     for (let i = 0; i < turns; i++) {
-        legalMoves = getLegalMoves(board);
-        cell = selectMoveRandomly(board, legalMoves, player);
-        let w = [
-            checkWinH(board, cellsToConnect, player, cell),
-            checkWinV(board, cellsToConnect, player, cell),
-            checkWinDiaL(board, cellsToConnect, player, cell)
-            // checkWinDiaR(board, cellsToConnect, player, cell)
-        ];
-        console.log(w);
+        legalCells = getLegalCells(board);
+        for (let j = 0; j < legalCells.length; j++) {
+            let w = [
+                checkVertically(board, cellsToConnect, player, legalCells[j]),
+                checkHorizontally(board, cellsToConnect, player, legalCells[j]),
+                checkDiagonallyL(board, cellsToConnect, player, legalCells[j]),
+                checkDiagonallyR(board, cellsToConnect, player, legalCells[j])
+            ];
+            let l = [
+                checkVertically(board, cellsToConnect, !player, legalCells[j]),
+                checkHorizontally(
+                    board,
+                    cellsToConnect,
+                    !player,
+                    legalCells[j]
+                ),
+                checkDiagonallyL(board, cellsToConnect, !player, legalCells[j]),
+                checkDiagonallyR(board, cellsToConnect, !player, legalCells[j])
+            ];
+            console.log(l);
+        }
+        console.log("------------------------");
+        selectCellRandomly(board, legalCells, player);
+        selectCellRandomly(board, legalCells, !player);
+        console.log("BOARD", board);
     }
-
     res.json(board);
 });
 
