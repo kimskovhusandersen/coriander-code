@@ -42,16 +42,143 @@ module.exports.selectMoveRandomly = function selectMoveRandomly(
     return randomCell;
 };
 
-module.exports.checkForWin = function checkForWin(
-    board,
-    cellsToConnect,
-    player
-) {
-    function checkForWinHorizontally(board, cellsToConnect, player, cell) {
-        if (cell.owner === player) {
+module.exports.checkWinH = function checkWinH(board, cTC, player, cell) {
+    const { col, row } = cell;
+    let i = 1;
+    let cc = 0;
+    let keepAdd = 1;
+    let keepSub = 1;
+
+    let checkConnectH = () => {
+        if ((!board[col + i] && !board[col - i]) || (!keepAdd && !keepSub)) {
+            return;
         }
-    }
-    function checkForWinVertically(board, cellsToConnect, player, cell) {}
-    function checkForWinDiagonallyX(board, cellsToConnect, player, cell) {}
-    function checkForWinDiagonallyY(board, cellsToConnect, player, cell) {}
+
+        if (board[col + i] && keepAdd) {
+            if (board[col + i][row].owner == player) {
+                cc++;
+            } else {
+                keepAdd = 0;
+            }
+        }
+        if (board[col - i] && keepSub) {
+            if (board[col - i][row].owner == player) {
+                cc++;
+            } else {
+                keepSub = 0;
+            }
+        }
+        i++;
+        checkConnectH();
+    };
+    checkConnectH();
+    return cc;
+};
+
+module.exports.checkWinV = function checkWinV(board, cTC, player, cell) {
+    const { col, row } = cell;
+    let i = 1;
+    let cc = 0;
+    let keepAdd = 1;
+    let keepSub = 1;
+
+    let checkConnectV = () => {
+        if (
+            (!board[col][row + i] && !board[col][row - i]) ||
+            (!keepAdd && !keepSub)
+        ) {
+            return;
+        }
+
+        if (board[col][row + i] && keepAdd) {
+            if (board[col][row + i].owner == player) {
+                cc++;
+            } else {
+                keepAdd = 0;
+            }
+        }
+        if (board[col][row - i] && keepSub) {
+            if (board[col][row - i].owner == player) {
+                cc++;
+            } else {
+                keepSub = 0;
+            }
+        }
+        i++;
+        checkConnectV();
+    };
+    checkConnectV();
+    return cc;
+};
+
+module.exports.checkWinDiaR = function checkWinDiaR(board, cTC, player, cell) {
+    const { col, row } = cell;
+    let i = 1;
+    let cc = 0;
+    let keepAdd = 1;
+    let keepSub = 1;
+
+    let checkWinDiaR = () => {
+        if (
+            (!board[col + i][row + i] && !board[col - i][row - i]) ||
+            (!keepAdd && !keepSub)
+        ) {
+            return;
+        }
+
+        if (board[col + i][row + i] && keepAdd) {
+            if (board[col + i][row + i].owner == player) {
+                cc++;
+            } else {
+                keepAdd = 0;
+            }
+        }
+        if (board[col - i][row - i] && keepSub) {
+            if (board[col - i][row - i].owner == player) {
+                cc++;
+            } else {
+                keepSub = 0;
+            }
+        }
+        i++;
+        checkWinDiaR();
+    };
+    checkWinDiaR();
+    return cc;
+};
+
+module.exports.checkWinDiaL = function checkWinDiaL(board, cTC, player, cell) {
+    const { col, row } = cell;
+    let i = 1;
+    let cc = 0;
+    let keepAdd = 1;
+    let keepSub = 1;
+
+    let checkWinDiaL = () => {
+        if (
+            (!board[col + i][row - i] && !board[col - i][row + i]) ||
+            (!keepAdd && !keepSub)
+        ) {
+            return;
+        }
+
+        if (board[col + i][row - i] && keepAdd) {
+            if (board[col + i][row - i].owner == player) {
+                cc++;
+            } else {
+                keepAdd = 0;
+            }
+        }
+        if (board[col - i][row + i] && keepSub) {
+            if (board[col - i][row + i].owner == player) {
+                cc++;
+            } else {
+                keepSub = 0;
+            }
+        }
+        i++;
+        checkWinDiaL();
+    };
+    checkWinDiaL();
+    return cc;
 };
