@@ -1,0 +1,9 @@
+<ul>
+{{#each b}}
+<li class="row">
+{{#each this}}
+<button class="cell {{this.owner}}">{{this.col}}, {{this.row}}</button>
+{{/each}}
+</li>
+{{/each}}
+</ul>

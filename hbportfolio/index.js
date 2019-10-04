@@ -26,9 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/projects/:projUrl", (req, res) => {
-    const {
-        projUrl
-    } = req.params;
+    const { projUrl } = req.params;
     const project = projects[projUrl];
     if (!project) {
         return res.sendStatus(404);

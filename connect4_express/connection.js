@@ -1,9 +1,26 @@
-module.exports.checkHorizontally = function checkHorizontally(
-    board,
-    cTC,
-    player,
-    cell
-) {
+module.exports = (board, player, cell) => {
+    let connectedCells = [];
+    if (Array.isArray(cell)) {
+        for (let i = 0; i < cell.length; i++) {
+            connectedCells.push([
+                checkHorizontally(board, player, cell[i]),
+                checkVertically(board, player, cell[i]),
+                checkDiagonallyR(board, player, cell[i]),
+                checkDiagonallyL(board, player, cell[i])
+            ]);
+        }
+    } else {
+        connectedCells.push([
+            checkHorizontally(board, player, cell),
+            checkVertically(board, player, cell),
+            checkDiagonallyR(board, player, cell),
+            checkDiagonallyL(board, player, cell)
+        ]);
+    }
+    return connectedCells;
+};
+
+function checkHorizontally(board, player, cell) {
     const { col, row } = cell;
     let i = 1;
     let cc = 0;
@@ -34,14 +51,9 @@ module.exports.checkHorizontally = function checkHorizontally(
     };
     checkConnectH();
     return cc;
-};
+}
 
-module.exports.checkVertically = function checkVertically(
-    board,
-    cTC,
-    player,
-    cell
-) {
+function checkVertically(board, player, cell) {
     const { col, row } = cell;
     let i = 1;
     let cc = 0;
@@ -75,14 +87,9 @@ module.exports.checkVertically = function checkVertically(
     };
     checkConnectV();
     return cc;
-};
+}
 
-module.exports.checkDiagonallyR = function checkDiagonallyR(
-    board,
-    cTC,
-    player,
-    cell
-) {
+function checkDiagonallyR(board, player, cell) {
     const { col, row } = cell;
     let i = 1;
     let cc = 0;
@@ -123,14 +130,9 @@ module.exports.checkDiagonallyR = function checkDiagonallyR(
     }
     checkDown();
     return cc;
-};
+}
 
-module.exports.checkDiagonallyL = function checkDiagonallyL(
-    board,
-    cTC,
-    player,
-    cell
-) {
+function checkDiagonallyL(board, player, cell) {
     const { col, row } = cell;
     let i = 1;
     let cc = 0;
@@ -171,4 +173,4 @@ module.exports.checkDiagonallyL = function checkDiagonallyL(
     }
     checkDown();
     return cc;
-};
+}

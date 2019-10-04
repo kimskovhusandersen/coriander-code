@@ -53,6 +53,7 @@
     border-radius: 50%;
     border: 2px solid white;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .dot.highlight {
