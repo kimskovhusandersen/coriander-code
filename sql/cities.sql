@@ -1,3 +1,6 @@
+-- from commandline:
+-- psql -d cities -f cities.sql
+
 -- DELETE TABLE
 DROP TABLE IF EXISTS cities;
 

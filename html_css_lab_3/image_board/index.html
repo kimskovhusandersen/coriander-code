@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="image_board.css">
+    <title>Upload image</title>
+</head>
+
+<body>
+    <div id="page">
+
+        <main>
+            <div id="image_board">
+                <header>
+                    <h3>Images</h3>
+
+                </header>
+                <div class="sub-nav">
+                    <span v-for="notification in notifications" v-if="notifications">{{notification}}. Click <button @click="getImages">here</button> to update.</span>
+                    <span v-if="tag">Filter by: {{tag.tag}} <button @click="removeTagFilter(tag.id)">X</button></span>
+                </div>
+                <div class="image-grid">
+                    <div class="image" v-for="image in images">
+                        <a :href="'#'+image.image_id">
+                            <img @click="image = image" v-bind:src='image.url' />
+                        </a>
+                        <div class="image-icons">
+                            <img src="icons/like_red.png" alt="like_red">
+                            <span>3 days ago</span>
+                        </div>
+                        <div class="image_info">
+                            <span class="username">{{image.username}}</span>
+                            <p>{{image.title}}</p>
+                        </div>
+                        <div class="tags">
+                            <span>tag1</span> <span>tag2</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="more-button" v-bind:class="{ on: isNotLastImage}" @click="getMoreImages" type="submit" name="more-btn">More</button>
+                <footer>
+                    <img src="icons/add_image.svg" alt="add image" />
+                </footer>
+            </div>
+
+        </main>
+        <image-component @close-image-modal="closeImage" @contact-mother-chicken="setTag" v-bind:selected-image="selectedImage" v-if="selectedImage"></image-component>
+
+    </div>
+</body>
+
+</html>

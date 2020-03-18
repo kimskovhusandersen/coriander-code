@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="show_image.css">
+    <title>Show image</title>
+</head>
+
+<body>
+    <div id="page">
+
+        <div id="show_image">
+            <header>
+                <a @click="closeImage"></a>
+                <h3>Image</h3>
+            </header>
+            <!-- <div class="sub-nav">
+                    <span v-for="notification in notifications" v-if="notifications">{{notification}}. Click <button @click="getImages">here</button> to update.</span>
+                    <span v-if="tag">Filter by: {{tag.tag}} <button @click="removeTagFilter(tag.id)">X</button></span>
+                </div> -->
+            <!-- <div class="image-grid"> -->
+
+            <!-- <img v-bind:src='image.url' /> -->
+
+            <div id="image-wrapper">
+                <a :href="'#'+image.prev_id"></a>
+                <img id="image" src="images/1.jpg" alt="">
+                <a :href="'#'+image.next_id"></a>
+            </div>
+            <div id="content-wrapper">
+                <div id="image-icons">
+                    <img src="icons/like_red.png" alt="like_red">
+                    <span>3 days ago</span>
+                </div>
+                <div id="image_infos">
+                    <span class="username">{{image.username}}</span>
+                    <p>{{image.title}}</p>
+                </div>
+                <div id="tags">
+                    <span>tag1</span> <span>tag2</span>
+                    <!-- <image-tags-component @contact-chicken="setTag" v-bind:selected-image="selectedImage" v-if="selectedImage"></image-tags-component> -->
+                </div>
+                <div id="upload_comment">
+                    <input id="username" v-model="username" type="text" name="username" placeholder="Username..">
+                    <input id="comment" v-model="comment" type="text" name="comment" placeholder="Write a comment..">
+                    <input id="image_id" v-model="imageId" type="hidden" name="imageId">
+                    <button @click="submitComment" type="submit" name="button">Submit</button>
+                </div>
+                <div id="comments">
+                    <a class="more-button" v-bind:class="{ on: isNotLastImage}" @click="getMoreImages" type="submit" name="more-btn">Show more comments</a>
+                    <div class="comment" v-for="comment in comments">
+                        <p><span class="username">{{comment.username}} </span>{{comment.comment}}</p>
+                    </div>
+                    <div class="comment" v-for="comment in comments">
+                        <p><span class="username">{{comment.username}} </span>{{comment.comment}}</p>
+                    </div>
+                    <div class="comment" v-for="comment in comments">
+                        <p><span class="username">{{comment.username}} </span>{{comment.comment}}</p>
+                    </div>
+                    <div class="comment" v-for="comment in comments">
+                        <p><span class="username">{{comment.username}} </span>{{comment.comment}}</p>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <img src="icons/add_image.svg" alt="add image" />
+            </footer>
+        </div>
+
+        <image-component @close-image-modal="closeImage" @contact-mother-chicken="setTag" v-bind:selected-image="selectedImage" v-if="selectedImage"></image-component>
+
+    </div>
+</body>
+
+</html>

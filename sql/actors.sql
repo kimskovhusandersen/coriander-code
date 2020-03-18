@@ -1,3 +1,6 @@
+-- from commandline:
+-- psql -d actors -f actors.sql
+
 DROP TABLE IF EXISTS actors;
 
 create table actors(

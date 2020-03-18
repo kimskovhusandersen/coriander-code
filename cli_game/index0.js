@@ -16,7 +16,18 @@
     const line = "--------------------------------------";
 
     const q1 = `${line}
-Du slår din far i hovedet med en grydeske eller vil vil du fange personen?
+A loud, abrupt noise grumbled its way
+from beneath the washroom door and into your bedroom.
+You were not sure that no one else was around at this time of night.
+
+You looked back and forth.
+Perhaps it was time for you to change your nature.
+
+It's time to decide...
+a. close your eyes and try to go back to sleep or
+b. decide to investigate.
+
+What's your choice - "investigate" or "go back to sleep"?
 ${line}
 Your answer?
 `;
@@ -194,8 +205,22 @@ You've got another chance to make up your mind. Choose wisely this time!
     const introduction = {
         ask: q1,
         answers: {
-            sværd: {},
-            grydeske: {}
+            investigate: {
+                ask: q2,
+                restrictions: "match",
+                answers: {
+                    "try to peek": {},
+                    "burst in the door": {},
+                    continue: {
+                        ask: q3,
+                        answers: {
+                            "follow the trail": followTheTrail,
+                            "search for clues": searchForClues
+                        }
+                    }
+                }
+            },
+            "go back to sleep": "Alright then. Good luck falling asleep now!"
         }
     };
 
